@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './App.css'
 import { w3cwebsocket } from 'websocket'
 import Quaternion from 'quaternion'
+import MiniDispositivo from '../MiniDispositivo/MiniDispositivo'
 
 const client = new w3cwebsocket('ws://192.168.0.17/echo', 'message')
 
@@ -85,6 +86,9 @@ const App = () => {
                   >
                     xx
                   </div>
+                </td>
+                <td>
+                  <MiniDispositivo mac={mac} rot={rot} />
                 </td>
               </tr>
             })
