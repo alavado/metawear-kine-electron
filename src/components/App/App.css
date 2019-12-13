@@ -1,6 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
 td {
   padding: 8px;
   font-family: 'Courier New', Courier, monospace;
   text-align: right;
   min-width: 80px;
+}
+
+.rectangulo {
+  width: 60px;
+  height: 100px;
+  background-color: red;
+  transition: transform .1s ease-in-out;
 }
