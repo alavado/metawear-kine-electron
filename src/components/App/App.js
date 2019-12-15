@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import { w3cwebsocket } from 'websocket'
 import Quaternion from 'quaternion'
@@ -7,28 +7,6 @@ import MiniDispositivo from '../MiniDispositivo/MiniDispositivo'
 const client = new w3cwebsocket('ws://192.168.0.17/echo', 'message')
 
 const App = () => {
-
-  const [dispositivosPrueba, setDispositivosPrueba] = useState({
-    'AA:BB:CC:DD:EE:FF': [0.1, 0.2, 0.3, 0.4],
-    'FF:BB:CC:DD:EE:AA': [0.4, 0.3, 0.2, 0.1]
-  })
-
-  useEffect(() => {
-    const interval = () => setInterval(() => {
-      let disp = {}
-      Object.keys(dispositivosPrueba).forEach(d => {
-        disp[d] = [
-          Math.random(),
-          Math.random(),
-          Math.random(),
-          Math.random()
-        ]
-      })
-      setDispositivosPrueba(disp)
-    }, 100)
-    interval()
-    return () => clearInterval(interval)
-  }, [])
 
   const [mensaje, setMensaje] = useState('Nada')
   const [dispositivos, setDispositivos] = useState({})
@@ -52,8 +30,7 @@ const App = () => {
     }
   }
 
-  const macs = Object.keys(dispositivos) 
-  //const macs = Object.keys(dispositivosPrueba)
+  const macs = Object.keys(dispositivos)
 
   return (
     <div className="App">
