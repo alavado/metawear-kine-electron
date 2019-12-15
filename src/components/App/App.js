@@ -72,7 +72,7 @@ const App = () => {
           {macs.length > 0 &&
             macs.map(mac => {
               const rot = dispositivos[mac]
-              const q = new Quaternion(rot[0], rot[1], rot[2], rot[3])
+              const q = new Quaternion(rot[0], -rot[1], rot[2], -rot[3])
               return <tr key={`fila-${mac}`}>
                 <td>{mac}</td>
                 <td>{rot[0].toLocaleString('de-DE')}</td>
@@ -80,8 +80,8 @@ const App = () => {
                 <td>{rot[2].toLocaleString('de-DE')}</td>
                 <td>{rot[3].toLocaleString('de-DE')}</td>
                 <td>
-                  <div id="tridiv" >
-                    <div className="scene" style={{transform: `matrix3d(${q.conjugate().toMatrix4()})`}}>
+                    <div id="tridiv">
+                    <div className="scene" style={{transform: `rotateX(80deg) matrix3d(${q.conjugate().toMatrix4()})`}}>
     <div className="shape cuboid-1 cub-1">
       <div className="face ft">
         <div className="photon-shader" style={{backgroundColor: 'rgba(0, 0, 0, 0.15)',}}></div>
@@ -144,6 +144,56 @@ const App = () => {
         <div className="face side s2">
           <div className="photon-shader" style={{backgroundColor: 'rgba(0, 0, 0, 0.196)',}}></div>
         </div>
+      </div>
+    </div>
+    <div className="shape cylinder-1 cyl-1">
+      <div className="face bm">
+        <div className="photon-shader" style={{backgroundColor: 'rgba(0, 0, 0, 0.15)',}}></div>
+      </div>
+      <div className="face tp">
+        <div className="photon-shader" style={{backgroundColor: 'rgba(0, 0, 0, 0.15)',}}></div>
+      </div>
+      <div className="face side s0">
+        <div className="photon-shader" style={{backgroundColor: 'rgba(0, 0, 0, 0.118)',}}></div>
+      </div>
+      <div className="face side s1">
+        <div className="photon-shader" style={{backgroundColor: 'rgba(0, 0, 0, 0.08)',}}></div>
+      </div>
+      <div className="face side s2">
+        <div className="photon-shader" style={{backgroundColor: 'rgba(0, 0, 0, 0.09)',}}></div>
+      </div>
+      <div className="face side s3">
+        <div className="photon-shader" style={{backgroundColor: 'rgba(0, 0, 0, 0.15)',}}></div>
+      </div>
+      <div className="face side s4">
+        <div className="photon-shader" style={{backgroundColor: 'rgba(0, 0, 0, 0.23)',}}></div>
+      </div>
+      <div className="face side s5">
+        <div className="photon-shader" style={{backgroundColor: 'rgba(0, 0, 0, 0.32)',}}></div>
+      </div>
+      <div className="face side s6">
+        <div className="photon-shader" style={{backgroundColor: 'rgba(0, 0, 0, 0.41)',}}></div>
+      </div>
+      <div className="face side s7">
+        <div className="photon-shader" style={{backgroundColor: 'rgba(0, 0, 0, 0.482)',}}></div>
+      </div>
+      <div className="face side s8">
+        <div className="photon-shader" style={{backgroundColor: 'rgba(0, 0, 0, 0.52)',}}></div>
+      </div>
+      <div className="face side s9">
+        <div className="photon-shader" style={{backgroundColor: 'rgba(0, 0, 0, 0.51)',}}></div>
+      </div>
+      <div className="face side s10">
+        <div className="photon-shader" style={{backgroundColor: 'rgba(0, 0, 0, 0.15)',}}></div>
+      </div>
+      <div className="face side s11">
+        <div className="photon-shader" style={{backgroundColor: 'rgba(0, 0, 0, 0.37)',}}></div>
+      </div>
+      <div className="face side s12">
+        <div className="photon-shader" style={{backgroundColor: 'rgba(0, 0, 0, 0.28)',}}></div>
+      </div>
+      <div className="face side s13">
+        <div className="photon-shader" style={{backgroundColor: 'rgba(0, 0, 0, 0.19)',}}></div>
       </div>
     </div>
   </div>
