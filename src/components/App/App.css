@@ -20,8 +20,9 @@ td {
 
 /* /!\ You need to add vendor prefixes in order to render the CSS properly (or simply use http://leaverou.github.io/prefixfree/) /!\ */ #tridiv {
   perspective: 800px;
+  position: absolute;
   overflow: hidden;
-  width: 100px;
+  width: 200px;
   height: 100px;
   background: transparent;
   font-size: 100%;
@@ -39,7 +40,6 @@ td {
   top: 50%;
   left: 50%;
   margin: -40em 0 0 -40em;
-  transition: transform .1s ease-in-out;
 }
 .shape {
   top: 50%;

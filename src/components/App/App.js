@@ -52,8 +52,8 @@ const App = () => {
     }
   }
 
-  // const macs = Object.keys(dispositivos) 
-  const macs = Object.keys(dispositivosPrueba)
+  const macs = Object.keys(dispositivos) 
+  //const macs = Object.keys(dispositivosPrueba)
 
   return (
     <div className="App">
@@ -71,7 +71,7 @@ const App = () => {
         <tbody>
           {macs.length > 0 &&
             macs.map(mac => {
-              const rot = dispositivosPrueba[mac]
+              const rot = dispositivos[mac]
               const q = new Quaternion(rot[0], rot[1], rot[2], rot[3])
               return <tr key={`fila-${mac}`}>
                 <td>{mac}</td>
