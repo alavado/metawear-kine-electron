@@ -10,3 +10,7 @@ td {
   height: 150px;
   vertical-align: middle;
 }
+
+td:first-child {
+  text-transform: uppercase;
+}

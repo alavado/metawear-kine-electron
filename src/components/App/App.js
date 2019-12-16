@@ -4,14 +4,14 @@ import { w3cwebsocket } from 'websocket'
 import Quaternion from 'quaternion'
 import MiniDispositivo from '../MiniDispositivo/MiniDispositivo'
 
-const client = new w3cwebsocket('ws://192.168.0.17/echo', 'message')
-
 const App = () => {
 
   const [mensaje, setMensaje] = useState('Nada')
   const [dispositivos, setDispositivos] = useState({})
+  const macs = Object.keys(dispositivos)
 
   const conectarConRaspberryPi = () => {
+    const client = new w3cwebsocket('ws://192.168.0.17/echo', 'message')
     setMensaje('Conectando...')
     client.onerror = () => {
       setMensaje('Error: No se encontró una Raspberry Pi en la URL ingresada.')
@@ -29,8 +29,6 @@ const App = () => {
       }
     }
   }
-
-  const macs = Object.keys(dispositivos)
 
   return (
     <div className="App">
