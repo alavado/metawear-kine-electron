@@ -1,0 +1,12 @@
+td {
+  padding: 8px;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: right;
+  min-width: 100px;
+  height: 150px;
+  vertical-align: middle;
+}
+
+td:first-child {
+  text-transform: uppercase;
+}

@@ -1,35 +1,14 @@
 import React, { useState } from 'react'
-import { w3cwebsocket } from 'websocket'
 import Quaternion from 'quaternion'
 import MiniDispositivo from './MiniDispositivo'
 import './Conexion.css'
+import { useSelector } from 'react-redux'
 
-const Conexion = () => {
+const Conexion = ({conectar, mensaje}) => {
 
-  const [mensaje, setMensaje] = useState('Nada')
-  const [dispositivos, setDispositivos] = useState({})
+  const dispositivos = useSelector(state => state.dispositivos.dispositivos)
   const [ipRaspberry, setIpRaspberry] = useState('192.168.0.17')
   const macs = Object.keys(dispositivos)
-
-  const conectarConRaspberryPi = () => {
-    const client = new w3cwebsocket(`ws://${ipRaspberry}/echo`, 'message')
-    setMensaje('Conectando...')
-    client.onerror = () => {
-      setMensaje('Error: No se encontró una Raspberry Pi en la URL ingresada.')
-    }
-    client.onopen = () => {
-      setMensaje('Conexión exitosa con Rasberry Pi')
-    }
-    client.onclose = () => {
-      setMensaje('Conexión cerrada')
-      setDispositivos({})
-    }
-    client.onmessage = e => {
-      if (typeof e.data === 'string') {
-        setDispositivos(JSON.parse(e.data))
-      }
-    }
-  }
 
   return (
     <div className="seccion">
@@ -66,7 +45,7 @@ const Conexion = () => {
           }
         </tbody>
       </table>
-      <button onClick={conectarConRaspberryPi}>Conectar</button>
+      <button onClick={() => conectar(ipRaspberry)}>Conectar</button>
     </div>
   )
 }

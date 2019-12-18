@@ -2,15 +2,15 @@
   box-sizing: border-box;
 }
 
-td {
-  padding: 8px;
-  font-family: 'Courier New', Courier, monospace;
-  text-align: right;
-  min-width: 100px;
-  height: 150px;
-  vertical-align: middle;
+a {
+  text-decoration: none;
 }
 
-td:first-child {
-  text-transform: uppercase;
+.menu {
+  display: flex;
+}
+
+.menu a {
+  flex: 1;
+  text-align: center;
 }
