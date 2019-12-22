@@ -17,7 +17,7 @@ const Conexion = ({conectar}) => {
           <input type="text" value={ipRaspberry} onChange={e => setIpRaspberry(e.target.value)} />
           <button onClick={() => conectar(ipRaspberry)}>Conectar</button>
         </div> :
-        <h1>Dispositivos</h1>
+        <h1>Conexión establecida</h1>
       }
       <div id="contenedor-dispositivos">
         {macs.length > 0 &&
