@@ -21,11 +21,15 @@ const Conexion = ({conectar}) => {
       }
       <div id="contenedor-dispositivos">
         {macs.length > 0 &&
-          macs.map(mac => {
+          macs.map((mac, i) => {
             const rot = dispositivos[mac]
             const q = new Quaternion(rot[0], -rot[1], rot[2], -rot[3])
             return (
-              <div key={`contenedor-dispositivo-${mac}`} className="contenedor-dispositivo">
+              <div
+                key={`contenedor-dispositivo-${mac}`}
+                className="contenedor-dispositivo"
+                style={{ animationDelay: `${0.1 * i}s` }}
+              >
                 <div className="mac">{mac}</div>
                 <div className="contenedor-mini-dispositivo">
                   <MiniDispositivo rot={q.conjugate().toMatrix4()} />
