@@ -3,9 +3,8 @@
 /* /!\ You need to add vendor prefixes in order to render the CSS properly (or simply use http://leaverou.github.io/prefixfree/) /!\ */ .tridiv {
   perspective: 800px;
   position: absolute;
-  overflow: hidden;
-  width: 200px;
-  height: 100px;
+  width: 360px;
+  height: 150px;
   background: transparent;
   font-size: 100%;
 }
@@ -21,7 +20,7 @@
   height: 80em;
   top: 50%;
   left: 50%;
-  margin: -40em 0 0 -40em;
+  margin: -40em 0 0 -51em;
 }
 .shape {
   top: 50%;

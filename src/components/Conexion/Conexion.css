@@ -1,12 +1,26 @@
-td {
-  padding: 8px;
-  font-family: 'Courier New', Courier, monospace;
-  text-align: right;
-  min-width: 100px;
-  height: 150px;
-  vertical-align: middle;
+#contenedor-dispositivos {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, auto);
 }
 
-td:first-child {
+.contenedor-dispositivo {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  height: 200px;
+  border-radius: 16px;
+  justify-self: center;
+}
+
+.contenedor-mini-dispositivo {
+  flex: 1;
+  background-color: red;
+}
+
+.contenedor-dispositivo .mac {
   text-transform: uppercase;
 }

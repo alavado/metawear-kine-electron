@@ -37,11 +37,11 @@ const App = () => {
   return (
     <div className="App">
       <div className="menu">
-        <Link to="/conexion">Conexion</Link>
-        <Link to="/esqueleto">Esqueleto</Link>
+        <Link to="/dispositivos">Dispositivos</Link>
+        <Link to="/esqueleto">???</Link>
       </div>
       <Switch>
-        <Route path="/conexion" component={() => <Conexion conectar={conectarConRaspberryPi} mensaje={mensaje} /> } />
+        <Route path="/dispositivos" component={() => <Conexion conectar={conectarConRaspberryPi} mensaje={mensaje} /> } />
         <Route path="/esqueleto" component={Esqueleto} />
       </Switch>
     </div>
