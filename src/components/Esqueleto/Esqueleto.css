@@ -1,0 +1,9 @@
+#contenedor-canvas {
+  display: flex;
+}
+
+#canvas-esqueleto {
+  flex: 1;
+  min-width: 300px;
+  min-height: 500px;
+}
