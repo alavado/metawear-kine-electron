@@ -59,9 +59,6 @@ function moveJoint(rot, joint) {
   const m4 = new Matrix4()
   m4.makeRotationFromQuaternion(new Quaternion(-rot[1], rot[2], -rot[3], rot[0]))
   joint.quaternion.setFromRotationMatrix(m4)
-  // let degrees = getMouseDegrees(mouse.x, mouse.y, degreeLimit);
-  // joint.rotation.y = THREE.Math.degToRad(degrees.x);
-  // joint.rotation.x = THREE.Math.degToRad(degrees.y);
 }
 
 const Character = props => {
@@ -132,21 +129,7 @@ const Character = props => {
     hand && moveJoint(props.dispositivos[keys[2]], hand);
   });
 
-  // const ref = useRef()
-  // useEffect(() => {
-  //   const m4 = new Matrix4()
-  //   m4.makeRotationFromQuaternion(new Quaternion(rot[1], rot[2], rot[3], rot[0]))
-  //   ref.current.quaternion.setFromRotationMatrix(m4)
-  // }, [rot])
-
   return (
-    // <mesh ref={ref}>
-    //   <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
-    //   <meshNormalMaterial attach="material" />
-    //   <skeleton>
-
-    //   </skeleton>
-    // </mesh>
     <group ref={group} {...props} dispose={null}>
       <object3D
         name="Stacy"
@@ -247,19 +230,5 @@ const App = () => {
     </>
   );
 }
-
-// const CanvasWrapped = () => {
-
-//   const dispositivos = useSelector(state => state.dispositivos.dispositivos)
-//   const rot = dispositivos[Object.keys(dispositivos)[0]]
-
-//   return (
-//     <div id="contenedor-canvas">
-//       <Canvas id="canvas-esqueleto">
-//         <Esqueleto rot={rot} />
-//       </Canvas>
-//     </div>
-//   )
-// }
 
 export default App
