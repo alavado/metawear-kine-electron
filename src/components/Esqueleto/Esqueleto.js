@@ -55,18 +55,26 @@ function getMouseDegrees(x, y, degreeLimit) {
   return { x: dx, y: dy };
 }
 
-function moveJoint(mouse, joint, degreeLimit = 40) {
-  let degrees = getMouseDegrees(mouse.x, mouse.y, degreeLimit);
-  joint.rotation.y = THREE.Math.degToRad(degrees.x);
-  joint.rotation.x = THREE.Math.degToRad(degrees.y);
+function moveJoint(rot, joint) {
+  const m4 = new Matrix4()
+  m4.makeRotationFromQuaternion(new Quaternion(-rot[1], rot[2], -rot[3], rot[0]))
+  joint.quaternion.setFromRotationMatrix(m4)
+  // let degrees = getMouseDegrees(mouse.x, mouse.y, degreeLimit);
+  // joint.rotation.y = THREE.Math.degToRad(degrees.x);
+  // joint.rotation.x = THREE.Math.degToRad(degrees.y);
 }
 
 const Character = props => {
+
+  console.log(props.rot)
 
   const group = useRef();
   const gltf = useLoader(GLTFLoader, "/stacy.glb")
   const [neck, setNeck] = useState(undefined);
   const [waist, setWaist] = useState(undefined);
+  const [shoulder, setShoulder] = useState(undefined);
+  const [arm, setArm] = useState(undefined);
+  const [hand, setHand] = useState(undefined);
   const [bones, skeleton] = useMemo(() => {
     // By putting bones into the view Threejs removes it automatically from the
     // cached scene. Next time the component runs these two objects will be gone.
@@ -83,6 +91,15 @@ const Character = props => {
       }
       if (o.isBone && o.name === "mixamorigSpine") {
         setWaist(o)
+      }
+      if (o.isBone && o.name === "mixamorigRightArm") {
+        setShoulder(o)
+      }
+      if (o.isBone && o.name === "mixamorigRightForeArm") {
+        setArm(o)
+      }
+      if (o.isBone && o.name === "mixamorigRightHand") {
+        setHand(o)
       }
     })
     return [gltf.bones, gltf.skeleton]
@@ -104,13 +121,15 @@ const Character = props => {
       golf: mixer.clipAction(gltf.animations[7], group.current),
       idle: mixer.clipAction(gltf.animations[8], group.current)
     };
-    actions.current.idle.play();
+    //actions.current.idle.play();
   }, [mixer, gltf]);
 
   useFrame((state, delta) => {
     mixer.update(delta);
-    props.mousePosition && neck && moveJoint(props.mousePosition, neck);
-    props.mousePosition && waist && moveJoint(props.mousePosition, waist);
+    const keys = Object.keys(props.dispositivos)
+    shoulder && moveJoint(props.dispositivos[keys[0]], shoulder);
+    arm && moveJoint(props.dispositivos[keys[1]], arm);
+    hand && moveJoint(props.dispositivos[keys[2]], hand);
   });
 
   // const ref = useRef()
@@ -180,6 +199,7 @@ const d = 8.25;
 
 const App = () => {
   const [mousePosition, setMousePosition] = useState({});
+  const dispositivos = useSelector(state => state.dispositivos.dispositivos)
   return (
     <>
       <div className="bg" />
@@ -213,6 +233,7 @@ const App = () => {
             mousePosition={mousePosition}
             position={[0, -11, 0]}
             scale={[7, 7, 7]}
+            dispositivos={dispositivos}
           />
         </Suspense>
         <Controls

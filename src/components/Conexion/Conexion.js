@@ -3,6 +3,7 @@ import Quaternion from 'quaternion'
 import MiniDispositivo from './MiniDispositivo'
 import './Conexion.css'
 import { useSelector } from 'react-redux'
+import Esqueleto from '../Esqueleto'
 
 const Conexion = ({conectar}) => {
 
