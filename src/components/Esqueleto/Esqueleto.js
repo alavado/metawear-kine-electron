@@ -63,6 +63,8 @@ function moveJoint(rot, joint) {
 
 const Character = props => {
 
+  // TODO: poner angulos por articulacion
+
   const group = useRef();
   const gltf = useLoader(GLTFLoader, "/stacy.glb")
   const [neck, setNeck] = useState(undefined);

@@ -12,7 +12,7 @@ const Conexion = ({conectar}) => {
 
   const dispositivos = useSelector(state => state.dispositivos.dispositivos)
   const historial = useSelector(state => state.dispositivos.historial)
-  const [ipRaspberry, setIpRaspberry] = useState('192.168.0.17')
+  const [ipRaspberry, setIpRaspberry] = useState('192.168.43.168')
   const macs = Object.keys(dispositivos)
 
   const options = {
