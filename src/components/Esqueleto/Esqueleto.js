@@ -63,8 +63,6 @@ function moveJoint(rot, joint) {
 
 const Character = props => {
 
-  console.log(props.rot)
-
   const group = useRef();
   const gltf = useLoader(GLTFLoader, "/stacy.glb")
   const [neck, setNeck] = useState(undefined);

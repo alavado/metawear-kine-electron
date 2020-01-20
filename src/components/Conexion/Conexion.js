@@ -8,7 +8,7 @@ import Esqueleto from '../Esqueleto'
 const Conexion = ({conectar}) => {
 
   const dispositivos = useSelector(state => state.dispositivos.dispositivos)
-  const [ipRaspberry, setIpRaspberry] = useState('192.168.0.15')
+  const [ipRaspberry, setIpRaspberry] = useState('192.168.0.17')
   const macs = Object.keys(dispositivos)
 
   return (

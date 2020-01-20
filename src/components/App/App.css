@@ -7,31 +7,66 @@ a {
   text-decoration: none;
 }
 
+@font-face {font-family: "Uber Move Text";
+  src: url("fonts/11469c307f0de6481e3a04cc5d54ae93.eot"); /* IE9*/
+  src: url("fonts/11469c307f0de6481e3a04cc5d54ae93.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("fonts/11469c307f0de6481e3a04cc5d54ae93.woff2") format("woff2"), /* chrome、firefox */
+  url("fonts/11469c307f0de6481e3a04cc5d54ae93.woff") format("woff"), /* chrome、firefox */
+  url("fonts/11469c307f0de6481e3a04cc5d54ae93.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url("fonts/11469c307f0de6481e3a04cc5d54ae93.svg#Uber Move Text") format("svg"); /* iOS 4.1- */
+}
+
 body {
-  background: #283c86;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #45a247, #283c86);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #45a247, #283c86); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: white;
   min-height: 100vh;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: white;
+  color: #333;
   overflow: hidden;
+  font-family: "Uber Move Text", sans-serif;
 }
 
-.menu {
+.app {
   display: flex;
-  box-shadow: 3px 3px 5px rgb(0, 0, 0, 0.2);
+  flex-direction: column;
 }
 
-.menu a {
-  flex: 1;
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.5);
+.contenedor-principal {
+  display: flex;
+  flex-direction: row;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, .15);
+  height: calc(100vh - 20px);
+  background-color: #3E5D58;
+  padding-top: 48px;
+}
+
+nav a {
+  text-align: left;
   color: white;
-  padding: 16px;
+  padding-left: 16px;
+  font-size: 12px;
+  min-width: 220px;
+  height: 48px;
+  display: flex;
+  align-items: center;
 }
 
-.menu a:not(:last-child) {
-  border-right: 2px solid rgba(0, 0, 0, 0.1);
+nav a:hover {
+  background-color: #333;
+}
+
+footer {
+  background-color: #008264;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 11px;
+  padding-left: 8px;
 }
 
 .seccion {
@@ -40,6 +75,7 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
 .seccion h1 {
   font-size: 1.5em;
   margin-bottom: 32px;

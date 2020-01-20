@@ -21,6 +21,7 @@
   top: 50%;
   left: 50%;
   margin: -40em 0 0 -51em;
+  pointer-events: none;
 }
 .shape {
   top: 50%;

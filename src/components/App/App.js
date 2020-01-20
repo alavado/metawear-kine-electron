@@ -13,7 +13,6 @@ const App = () => {
   const dispatch = useDispatch()
 
   const conectarConRaspberryPi = ip => {
-    console.log('x')
     const socket = new w3cwebsocket(`ws://${ip}/echo`, 'message')
     setMensaje('Conectando...')
     socket.onerror = () => {
@@ -35,15 +34,25 @@ const App = () => {
   }
 
   return (
-    <div className="App">
-      <div className="menu">
-        <Link to="/dispositivos">Dispositivos</Link>
-        <Link to="/esqueleto">???</Link>
+    <div className="app">
+      <div className="contenedor-principal">
+        <nav>
+          <Link to="/dispositivos">Conexión</Link>
+          <Link to="/esqueleto">Visualización 3D</Link>
+        </nav>
+        <Switch>
+          <Route path="/dispositivos" component={() => (
+            <Conexion
+              conectar={conectarConRaspberryPi}
+              mensaje={mensaje}
+            />
+          )} />
+          <Route path="/esqueleto" component={Esqueleto} />
+        </Switch>
       </div>
-      <Switch>
-        <Route path="/dispositivos" component={() => <Conexion conectar={conectarConRaspberryPi} mensaje={mensaje} /> } />
-        <Route path="/esqueleto" component={Esqueleto} />
-      </Switch>
+      <footer>
+        Conexión con Raspberry Pi establecida
+      </footer>
     </div>
   )
 }
