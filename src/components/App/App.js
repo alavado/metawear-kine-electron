@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './App.css'
 import Conexion from '../Conexion'
 import Esqueleto from '../Esqueleto'
-import { Link, Switch, Route } from 'react-router-dom'
+import { NavLink as Link, Switch, Route } from 'react-router-dom'
 import { w3cwebsocket } from 'websocket'
 import { useSelector, useDispatch } from 'react-redux'
 import { fijarEstadoConexion, actualizarDispositivos } from '../../redux/actions'
@@ -17,10 +17,16 @@ const App = () => {
     const socket = new w3cwebsocket(`ws://${ip}/echo`, 'message')
     dispatch(fijarEstadoConexion('Conectando...'))
     socket.onerror = () => {
-      dispatch(fijarEstadoConexion('Error: No se encontró una Raspberry Pi en la URL ingresada.'))
+      dispatch(fijarEstadoConexion({
+        texto: 'Error: No se encontró una Raspberry Pi en la URL ingresada.',
+        color: 'red'
+      }))
     }
     socket.onopen = () => {
-      dispatch(fijarEstadoConexion('Conexión exitosa con Rasberry Pi'))
+      dispatch(fijarEstadoConexion({
+        texto: 'Conexión exitosa con Rasberry Pi',
+        color: '#00A74A'
+      }))
     }
     socket.onclose = () => {
       dispatch(fijarEstadoConexion('Conexión cerrada'))
@@ -38,8 +44,9 @@ const App = () => {
     <div className="app">
       <div className="contenedor-principal">
         <nav>
-          <Link to="/dispositivos">Conexión</Link>
-          <Link to="/esqueleto">Visualización 3D</Link>
+          <h1>ACHS Kine</h1>
+          <Link to="/dispositivos" activeClassName="link-activo">Conexión</Link>
+          <Link to="/esqueleto" activeClassName="link-activo">Visualización 3D</Link>
         </nav>
         <Switch>
           <Route path="/dispositivos" component={() => (
@@ -51,7 +58,7 @@ const App = () => {
           <Route path="/esqueleto" component={Esqueleto} />
         </Switch>
       </div>
-      <footer>{estadoConexion}</footer>
+      <footer style={{ backgroundColor: estadoConexion.color }}>{estadoConexion.texto}</footer>
     </div>
   )
 }

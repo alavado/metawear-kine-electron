@@ -37,8 +37,9 @@
   background-color: #3E5D58;
   color: white;
   font-size: 12px;
-  padding: 8px 8px;
+  padding: 8px 16px;
   width: 100%;
+  letter-spacing: 1.5px;
 }
 
 #formulario-conexion {

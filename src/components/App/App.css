@@ -42,18 +42,33 @@ nav {
   height: calc(100vh - 20px);
   background-color: #3E5D58;
   padding-top: 48px;
+  min-width: 220px;
+}
+
+nav h1 {
+  color: white;
+  margin-left: 24px;
+  margin-bottom: 24px;
+  font-size: 1.3em;
+  border-bottom: 4px solid #00A74A;
 }
 
 nav a {
   text-align: left;
   color: white;
-  padding-left: 16px;
   font-size: 12px;
-  min-width: 220px;
+  padding-left: 24px;
   height: 48px;
   display: flex;
   align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
   transition: background-color .25s ease-in-out;
+}
+
+nav a.link-activo {
+  padding-left: 20px;
+  border-left: 4px solid #00A74A;
 }
 
 nav a:hover {
@@ -61,13 +76,13 @@ nav a:hover {
 }
 
 footer {
-  background-color: #008264;
   height: 20px;
   display: flex;
   align-items: center;
   color: white;
-  font-size: 11px;
+  font-size: 10px;
   padding-left: 8px;
+  transition: background-color .25s ease-in-out;
 }
 
 section {
@@ -104,6 +119,6 @@ button:hover {
   background-color: #008264;
 }
 
-canvas:focus {
+canvas:focus, a:focus {
   outline: none;
 }
