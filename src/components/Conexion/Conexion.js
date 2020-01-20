@@ -3,13 +3,45 @@ import Quaternion from 'quaternion'
 import MiniDispositivo from './MiniDispositivo'
 import './Conexion.css'
 import { useSelector } from 'react-redux'
+import { Line } from 'react-chartjs-2'
+import _ from 'lodash'
 import Esqueleto from '../Esqueleto'
+import { obtenerAngulosDesdeCuaternionMetawear } from '../../helpers/cuaterniones'
 
 const Conexion = ({conectar}) => {
 
   const dispositivos = useSelector(state => state.dispositivos.dispositivos)
+  const historial = useSelector(state => state.dispositivos.historial)
   const [ipRaspberry, setIpRaspberry] = useState('192.168.0.17')
   const macs = Object.keys(dispositivos)
+
+  const options = {
+    legend: {
+      display: false
+    },
+    scales: {
+      xAxes: [{
+        gridLines: {
+          display: false
+        },
+        scaleLabel: {
+          display: false,
+          labelString: 'Mes del ciclo'
+        }
+      }],
+      yAxes: [{
+        display: false,
+        scaleLabel: {
+          display: false,
+          labelString: 'Peso promedio (kg)'
+        },
+        ticks: {
+          suggestedMin: -180,
+          suggestedMax: 180
+        }
+      }]
+    }
+  }
 
   return (
     <section>
@@ -26,22 +58,8 @@ const Conexion = ({conectar}) => {
             const rot = dispositivos[mac]
             const w = rot[0], x = -rot[1], y = rot[2], z = -rot[3]
             const q = new Quaternion(w, x, y, z)
-
-            const sinr_cosp = 2 * (w * x + y * z)
-            const cosr_cosp = 1 - 2 * (x * x + y * y)
-            const roll = Math.atan2(sinr_cosp, cosr_cosp)
-
-            const sinp = 2 * (w * y - z * x)
-            let pitch
-            if (Math.abs(sinp) >= 1)
-                pitch = Math.sign(sinp) * Math.PI / 2 // use 90 degrees if out of range
-            else
-                pitch = Math.asin(sinp)
-
-            const siny_cosp = 2 * (w * z + x * y);
-            const cosy_cosp = 1 - 2 * (y * y + z * z);
-            const yaw = Math.atan2(siny_cosp, cosy_cosp);
-
+            const [roll, pitch, yaw] = obtenerAngulosDesdeCuaternionMetawear(rot)
+            console.log(_.takeRight(historial, 300).map(h => obtenerAngulosDesdeCuaternionMetawear(h[mac])[0]))
             return (
               <div
                 key={`contenedor-dispositivo-${mac}`}
@@ -51,9 +69,33 @@ const Conexion = ({conectar}) => {
                 <div className="barra-superior">{mac}</div>
                 <div className="main-dispositivo">
                   <div className="aside-dispositivo">
-                    <div>Roll: {Math.round(100 * roll * 360 / 6.28) / 100}</div>
-                    <div>Pitch: {Math.round(100 * pitch * 360 / 6.28) / 100}</div>
-                    <div>Yaw: {Math.round(100 * yaw * 360 / 6.28) / 100}</div>
+                    <div>Roll: {roll}</div>
+                    <div style={{marginTop: 12, width: '80px', height: '20px'}}>
+                      <Line
+                        data={{datasets: [
+                          { data: _.takeRight(historial, 300).map(h => obtenerAngulosDesdeCuaternionMetawear(h[mac])[0]) }
+                        ]}}
+                        options={options}
+                      />
+                    </div>
+                    <div>Pitch: {pitch}</div>
+                    <div style={{marginTop: 12, width: '80px', height: '20px'}}>
+                      <Line
+                        data={{datasets: [
+                          { data: _.takeRight(historial, 300).map(h => obtenerAngulosDesdeCuaternionMetawear(h[mac])[1]) }
+                        ]}}
+                        options={options}
+                      />
+                    </div>
+                    <div>Yaw: {yaw}</div>
+                    <div style={{marginTop: 12, width: '80px', height: '20px'}}>
+                      <Line
+                        data={{datasets: [
+                          { data: _.takeRight(historial, 300).map(h => obtenerAngulosDesdeCuaternionMetawear(h[mac])[2]) }
+                        ]}}
+                        options={options}
+                      />
+                    </div>
                   </div>
                   <div className="contenedor-mini-dispositivo">
                     <MiniDispositivo rot={q.conjugate().toMatrix4()} />

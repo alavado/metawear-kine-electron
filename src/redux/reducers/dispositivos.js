@@ -1,7 +1,8 @@
 import { ACTUALIZAR_DISPOSITIVOS } from "../actionTypes"
 
 const initialState = {
-  dispositivos: {}
+  dispositivos: {},
+  historial: []
 }
 
 export default function(state = initialState, action) {
@@ -9,7 +10,8 @@ export default function(state = initialState, action) {
     case ACTUALIZAR_DISPOSITIVOS: {
       return {
         ...state,
-        dispositivos: action.payload
+        dispositivos: action.payload,
+        historial: [...state.historial, action.payload]
       }
     }
     default:
