@@ -6,6 +6,6 @@ export const fijarEstadoConexion = estado => ({
 })
 
 export const actualizarDispositivos = dispositivos => ({
-  type: SELECCIONAR_REGION,
+  type: ACTUALIZAR_DISPOSITIVOS,
   payload: dispositivos
 })

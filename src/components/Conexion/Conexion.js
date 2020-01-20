@@ -12,13 +12,13 @@ const Conexion = ({conectar}) => {
   const macs = Object.keys(dispositivos)
 
   return (
-    <div className="seccion">
-      {macs.length === 0 ?
+    <section>
+      {macs.length === 0 &&
         <div id="formulario-conexion">
+          <label>IP de la Raspberry Pi</label>
           <input type="text" value={ipRaspberry} onChange={e => setIpRaspberry(e.target.value)} />
           <button onClick={() => conectar(ipRaspberry)}>Conectar</button>
-        </div> :
-        <h1>Conexión establecida</h1>
+        </div>
       }
       <div id="contenedor-dispositivos">
         {macs.length > 0 &&
@@ -45,7 +45,7 @@ const Conexion = ({conectar}) => {
           )})
         }
       </div>
-    </div>
+    </section>
   )
 }
 
