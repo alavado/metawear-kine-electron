@@ -53,10 +53,11 @@ nav a {
   height: 48px;
   display: flex;
   align-items: center;
+  transition: background-color .25s ease-in-out;
 }
 
 nav a:hover {
-  background-color: #333;
+  background-color: #008264;
 }
 
 footer {
