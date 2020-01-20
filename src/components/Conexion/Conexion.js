@@ -35,12 +35,12 @@ const Conexion = ({conectar}) => {
                 <div className="contenedor-mini-dispositivo">
                   <MiniDispositivo rot={q.conjugate().toMatrix4()} />
                 </div>
-                <div className="cuaternion">
+                {/* <div className="cuaternion">
                   {rot[0].toLocaleString('de-DE')} +
                   ({(-rot[1]).toLocaleString('de-DE')})i +
                   ({rot[2].toLocaleString('de-DE')})j +
                   ({(-rot[3]).toLocaleString('de-DE')})k
-                </div>
+                </div> */}
               </div>
           )})
         }

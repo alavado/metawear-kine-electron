@@ -5,14 +5,12 @@
 }
 
 .contenedor-dispositivo {
-  background-color: rgba(230, 230, 230, 1);
-  padding: 16px;
+  background-color: #A8D3C4;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 390px;
   height: 200px;
-  border-radius: 16px;
   justify-self: center;
   opacity: 0;
   animation: aparecer .5s ease-in-out forwards;
@@ -35,6 +33,12 @@
 
 .contenedor-dispositivo .mac {
   text-transform: uppercase;
+  align-self: flex-start;
+  background-color: #3E5D58;
+  color: white;
+  font-size: 12px;
+  padding: 8px 8px;
+  width: 100%;
 }
 
 #formulario-conexion {
@@ -45,6 +49,7 @@
 
 #formulario-conexion > input {
   margin-top: 4px;
+  text-align: center;
 }
 
 #formulario-conexion > button {
