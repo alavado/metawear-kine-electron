@@ -10,10 +10,10 @@ export const actualizarDispositivos = dispositivos => ({
   payload: Object.keys(dispositivos).map(k => ({
     mac: k,
     q: {
-      x: dispositivos[k][0],
-      y: dispositivos[k][1],
-      z: dispositivos[k][2],
-      w: dispositivos[k][3],
+      x: dispositivos[k][1],
+      y: dispositivos[k][2],
+      z: dispositivos[k][3],
+      w: dispositivos[k][0],
     }
   }))
 })

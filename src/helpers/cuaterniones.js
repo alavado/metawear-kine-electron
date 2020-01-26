@@ -1,5 +1,5 @@
-export const obtenerAngulosDesdeCuaternionMetawear = rot => {
-  const w = rot[0], x = -rot[1], y = rot[2], z = -rot[3]
+export const obtenerAngulosDesdeCuaternionMetawear = q => {
+  const { w, x, y, z } = q
   const sinr_cosp = 2 * (w * x + y * z)
   const cosr_cosp = 1 - 2 * (x * x + y * y)
   const roll = Math.atan2(sinr_cosp, cosr_cosp)
