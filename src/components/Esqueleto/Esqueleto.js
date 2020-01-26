@@ -7,6 +7,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { TextureLoader } from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import './Esqueleto.css'
+import _ from 'lodash'
 
 function getMousePos(e) {
   return { x: e.clientX, y: e.clientY }
@@ -57,7 +58,8 @@ function getMouseDegrees(x, y, degreeLimit) {
 
 function moveJoint(rot, joint) {
   const m4 = new Matrix4()
-  m4.makeRotationFromQuaternion(new Quaternion(-rot[1], rot[2], -rot[3], rot[0]))
+  const { x, y, z, w } = rot
+  m4.makeRotationFromQuaternion(new Quaternion(-x, y, -z, w))
   joint.quaternion.setFromRotationMatrix(m4)
 }
 
@@ -123,10 +125,9 @@ const Character = props => {
 
   useFrame((state, delta) => {
     mixer.update(delta)
-    const keys = Object.keys(props.dispositivos)
-    shoulder && moveJoint(props.dispositivos[keys[0]], shoulder)
-    arm && moveJoint(props.dispositivos[keys[1]], arm)
-    hand && moveJoint(props.dispositivos[keys[2]], hand)
+    shoulder && moveJoint(props.dispositivos[0].q, shoulder)
+    arm && moveJoint(props.dispositivos[1].q, arm)
+    hand && moveJoint(props.dispositivos[2].q, hand)
   })
 
   return (
@@ -183,7 +184,7 @@ const App = () => {
   const d = 8.25
   const [mousePosition, setMousePosition] = useState({})
   const dispositivos = useSelector(state => state.dispositivos.dispositivos)
-  if (dispositivos.length === 0) {
+  if (_.isEmpty(dispositivos)) {
     return null
   }
   return (
