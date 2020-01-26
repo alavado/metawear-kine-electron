@@ -13,7 +13,6 @@ const Conexion = ({conectar}) => {
   const dispositivos = useSelector(state => state.dispositivos.dispositivos)
   const historial = useSelector(state => state.dispositivos.historial)
   const [ipRaspberry, setIpRaspberry] = useState('192.168.43.168')
-  const macs = Object.keys(dispositivos)
 
   const options = {
     legend: {
@@ -45,7 +44,7 @@ const Conexion = ({conectar}) => {
 
   return (
     <section>
-      {macs.length === 0 &&
+      {dispositivos.length === 0 &&
         <div id="formulario-conexion">
           <label>IP de la Raspberry Pi</label>
           <input type="text" value={ipRaspberry} onChange={e => setIpRaspberry(e.target.value)} />
@@ -53,61 +52,56 @@ const Conexion = ({conectar}) => {
         </div>
       }
       <div id="contenedor-dispositivos">
-        {macs.length > 0 &&
-          macs.map((mac, i) => {
-            const rot = dispositivos[mac]
-            const w = rot[0], x = -rot[1], y = rot[2], z = -rot[3]
-            const q = new Quaternion(w, x, y, z)
-            const [roll, pitch, yaw] = obtenerAngulosDesdeCuaternionMetawear(rot)
-            console.log(_.takeRight(historial, 300).map(h => obtenerAngulosDesdeCuaternionMetawear(h[mac])[0]))
-            return (
-              <div
-                key={`contenedor-dispositivo-${mac}`}
-                className="contenedor-dispositivo"
-                style={{ animationDelay: `${0.1 * i}s` }}
-              >
-                <div className="barra-superior">{mac}</div>
-                <div className="main-dispositivo">
-                  <div className="aside-dispositivo">
-                    <div>Roll: {roll}</div>
-                    <div style={{marginTop: 12, width: '80px', height: '20px'}}>
-                      <Line
-                        data={{datasets: [
-                          { data: _.takeRight(historial, 300).map(h => obtenerAngulosDesdeCuaternionMetawear(h[mac])[0]) }
-                        ]}}
-                        options={options}
-                      />
-                    </div>
-                    <div>Pitch: {pitch}</div>
-                    <div style={{marginTop: 12, width: '80px', height: '20px'}}>
-                      <Line
-                        data={{datasets: [
-                          { data: _.takeRight(historial, 300).map(h => obtenerAngulosDesdeCuaternionMetawear(h[mac])[1]) }
-                        ]}}
-                        options={options}
-                      />
-                    </div>
-                    <div>Yaw: {yaw}</div>
-                    <div style={{marginTop: 12, width: '80px', height: '20px'}}>
-                      <Line
-                        data={{datasets: [
-                          { data: _.takeRight(historial, 300).map(h => obtenerAngulosDesdeCuaternionMetawear(h[mac])[2]) }
-                        ]}}
-                        options={options}
-                      />
-                    </div>
+        {dispositivos.map(({mac, q}, i) => {
+          const [roll, pitch, yaw] = obtenerAngulosDesdeCuaternionMetawear(q)
+          return (
+            <div
+              key={`contenedor-dispositivo-${mac}`}
+              className="contenedor-dispositivo"
+              style={{ animationDelay: `${0.1 * i}s` }}
+            >
+              <div className="barra-superior">{mac}</div>
+              <div className="main-dispositivo">
+                <div className="aside-dispositivo">
+                  <div>Roll: {roll}</div>
+                  <div style={{marginTop: 12, width: '80px', height: '20px'}}>
+                    {/* <Line
+                      data={{datasets: [
+                        { data: _.takeRight(historial, 300).map(h => obtenerAngulosDesdeCuaternionMetawear(h[mac])[0]) }
+                      ]}}
+                      options={options}
+                    /> */}
                   </div>
-                  <div className="contenedor-mini-dispositivo">
-                    <MiniDispositivo rot={q.conjugate().toMatrix4()} />
+                  <div>Pitch: {pitch}</div>
+                  <div style={{marginTop: 12, width: '80px', height: '20px'}}>
+                    {/* <Line
+                      data={{datasets: [
+                        { data: _.takeRight(historial, 300).map(h => obtenerAngulosDesdeCuaternionMetawear(h[mac])[1]) }
+                      ]}}
+                      options={options}
+                    /> */}
+                  </div>
+                  <div>Yaw: {yaw}</div>
+                  <div style={{marginTop: 12, width: '80px', height: '20px'}}>
+                    {/* <Line
+                      data={{datasets: [
+                        { data: _.takeRight(historial, 300).map(h => obtenerAngulosDesdeCuaternionMetawear(h[mac])[2]) }
+                      ]}}
+                      options={options}
+                    /> */}
                   </div>
                 </div>
-                {/* <div className="cuaternion">
-                  {rot[0].toLocaleString('de-DE')} +
-                  ({(-rot[1]).toLocaleString('de-DE')})i +
-                  ({rot[2].toLocaleString('de-DE')})j +
-                  ({(-rot[3]).toLocaleString('de-DE')})k
-                </div> */}
+                <div className="contenedor-mini-dispositivo">
+                  <MiniDispositivo rot={new Quaternion(q.w, -q.x, q.y, -q.z).conjugate().toMatrix4()} />
+                </div>
               </div>
+              {/* <div className="cuaternion">
+                {rot[0].toLocaleString('de-DE')} +
+                ({(-rot[1]).toLocaleString('de-DE')})i +
+                ({rot[2].toLocaleString('de-DE')})j +
+                ({(-rot[3]).toLocaleString('de-DE')})k
+              </div> */}
+            </div>
           )})
         }
       </div>

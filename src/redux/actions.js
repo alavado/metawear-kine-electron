@@ -7,5 +7,13 @@ export const fijarEstadoConexion = estado => ({
 
 export const actualizarDispositivos = dispositivos => ({
   type: ACTUALIZAR_DISPOSITIVOS,
-  payload: dispositivos
+  payload: Object.keys(dispositivos).map(k => ({
+    mac: k,
+    q: {
+      x: dispositivos[k][0],
+      y: dispositivos[k][1],
+      z: dispositivos[k][2],
+      w: dispositivos[k][3],
+    }
+  }))
 })

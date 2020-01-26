@@ -1,7 +1,7 @@
 import { ACTUALIZAR_DISPOSITIVOS } from "../actionTypes"
 
 const initialState = {
-  dispositivos: {},
+  dispositivos: [],
   historial: []
 }
 
