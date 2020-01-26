@@ -28,7 +28,7 @@ const MiniGrafico = ({ data }) => {
           display: false
         },
         ticks: {
-          suggestedMin: -180,
+          suggestedMin: -220,
           suggestedMax: 180,
           display: false
         }
@@ -46,7 +46,8 @@ const MiniGrafico = ({ data }) => {
               data,
               pointRadius: 0,
               fill: false,
-              borderColor: '#00C65E'
+              borderColor: '#00C65E',
+              borderWidth: 1
             }
         ]}}
         options={options}

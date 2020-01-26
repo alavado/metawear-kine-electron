@@ -34,15 +34,15 @@ const Conexion = ({conectar}) => {
               <div className="barra-superior">{mac}</div>
               <div className="main-dispositivo">
                 <div className="aside-dispositivo">
-                  <div>Roll: {roll}</div>
+                  <div className="valor">Alabeo: {roll}</div>
                   <MiniGrafico
                     data={historial.map(h => obtenerAngulosDesdeCuaternionMetawear(_.find(h.dispositivos, { mac }).q)[0])}
                   />
-                  <div>Pitch: {pitch}</div>
+                  <div className="valor">Cabeceo: {pitch}</div>
                   <MiniGrafico
                     data={historial.map(h => obtenerAngulosDesdeCuaternionMetawear(_.find(h.dispositivos, { mac }).q)[1])}
                   />
-                  <div>Yaw: {yaw}</div>
+                  <div className="valor">Guiñada: {yaw}</div>
                   <MiniGrafico
                     data={historial.map(h => obtenerAngulosDesdeCuaternionMetawear(_.find(h.dispositivos, { mac }).q)[2])}
                   />

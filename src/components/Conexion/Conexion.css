@@ -54,6 +54,21 @@
   font-size: 12px;
 }
 
+.aside-dispositivo > .valor {
+  margin-top: 10px;
+  margin-bottom: -6px;
+  font-size: 10px;
+}
+
+.aside-dispositivo > .valor:first-child {
+  margin-top: 0;
+}
+
+.aside-dispositivo canvas {
+  margin: 0;
+  padding: 0;
+}
+
 .contenedor-mini-dispositivo {
   flex: 1;
   margin-left: 120px;
