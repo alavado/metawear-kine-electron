@@ -29,12 +29,12 @@ export const actualizarAngulosSegmento = (nombre, angulos) => {
         valor: angulos[0]
       },
       {
-        nombre: 'Radialización / ulnarización',
+        nombre: '',
         eje: 'y',
         valor: angulos[1]
       },
       {
-        nombre: '',
+        nombre: 'Radialización / ulnarización',
         eje: 'z',
         valor: angulos[2]
       }
@@ -43,17 +43,17 @@ export const actualizarAngulosSegmento = (nombre, angulos) => {
   else if (nombre === 'antebrazo derecho') {
     angulosFormateados = [
       {
-        nombre: '',
+        nombre: 'Pronación / supinación',
         eje: 'x',
         valor: angulos[0]
       },
       {
-        nombre: 'Flexión / extensión',
+        nombre: '',
         eje: 'y',
         valor: angulos[1]
       },
       {
-        nombre: 'Pronación / supinación',
+        nombre: 'Flexión / extensión',
         eje: 'z',
         valor: angulos[2]
       }

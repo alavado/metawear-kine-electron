@@ -11,12 +11,12 @@ const initialState = {
           valor: 0
         },
         {
-          nombre: 'Radialización / ulnarización',
+          nombre: '',
           eje: 'y',
           valor: 0
         },
         {
-          nombre: '',
+          nombre: 'Radialización / ulnarización',
           eje: 'z',
           valor: 0
         }
