@@ -72,7 +72,7 @@ export const actualizarAngulosSegmento = (nombre, angulos) => {
         valor: angulos[1]
       },
       {
-        nombre: 'Rotación interna / externa',
+        nombre: 'Rot. interna / externa',
         eje: 'z',
         valor: angulos[2]
       }

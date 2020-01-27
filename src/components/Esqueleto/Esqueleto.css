@@ -18,6 +18,9 @@
 }
 
 .contenedor-esqueleto .barra-derecha {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 300px;
   background-color: #3E5D58;
   color: white;
@@ -26,5 +29,35 @@
 
 .contenedor-esqueleto .barra-derecha h3 {
   text-transform: capitalize;
-  margin-top: 16px;
+  margin-bottom: 8px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.contenedor-esqueleto .barra-derecha li {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.contenedor-esqueleto ul {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.contenedor-esqueleto li {
+  background-color: #00A74A;
+  text-align: center;
+  padding: 4px 0;
+  border-radius: 4px;
+}
+
+.contenedor-esqueleto li h4 {
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.contenedor-esqueleto li p {
+  font-size: 21px;
+  font-weight: bold;
 }
