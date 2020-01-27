@@ -1,13 +1,15 @@
-import React, { Suspense, useRef, useEffect, useMemo, useState } from 'react'
+import React, { Suspense, useRef, useMemo, useState } from 'react'
 import { Canvas, useFrame, useLoader, extend, useThree, useRender } from 'react-three-fiber'
 import { Quaternion, Matrix4 } from 'three'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { TextureLoader } from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import './Esqueleto.css'
 import _ from 'lodash'
+import { actualizarAngulosSegmento } from '../../redux/actions'
+import { rad2deg } from '../../helpers/cuaterniones'
 
 function getMousePos(e) {
   return { x: e.clientX, y: e.clientY }
@@ -56,16 +58,26 @@ function getMouseDegrees(x, y, degreeLimit) {
   return { x: dx, y: dy }
 }
 
-function moveJoint(rot, joint) {
+function moveJoint(rot, joint, dispatch) {
   const m4 = new Matrix4()
   const { x, y, z, w } = rot
-  m4.makeRotationFromQuaternion(new Quaternion(-x, y, -z, w))
+  m4.makeRotationFromQuaternion(new Quaternion(y, x, -z, w))
   joint.quaternion.setFromRotationMatrix(m4)
+  const { _x, _y, _z } = joint.rotation
+  switch(joint.name) {
+    case 'mixamorigRightHand':
+      dispatch(actualizarAngulosSegmento('mano derecha', [_x, _y, _z]))
+      break
+    case 'mixamorigRightForeArm':
+      dispatch(actualizarAngulosSegmento('antebrazo derecho', [_x, _y, _z]))
+      break
+    case 'mixamorigRightArm':
+      dispatch(actualizarAngulosSegmento('brazo derecho', [_x, _y, _z]))
+      break
+  }
 }
 
 const Character = props => {
-
-  // TODO: poner angulos por articulacion
 
   const group = useRef()
   const gltf = useLoader(GLTFLoader, "/stacy.glb")
@@ -79,10 +91,12 @@ const Character = props => {
     // cached scene. Next time the component runs these two objects will be gone.
     // Since the gltf object is a permenently cached object, we can extend it here
     // and extend it with all the data we may need.
-    if (!gltf.bones) gltf.bones = gltf.scene.children[0].children[0]
-    if (!gltf.skeleton)
+    if (!gltf.bones) {
+      gltf.bones = gltf.scene.children[0].children[0]
+    }
+    if (!gltf.skeleton) {
       gltf.skeleton = gltf.scene.children[0].children[1].skeleton
-
+    }
     gltf.scene.traverse(o => {
       // Reference the neck and waist bones
       if (o.isBone && o.name === "mixamorigNeck") {
@@ -105,29 +119,13 @@ const Character = props => {
   }, [gltf])
 
   const texture = useLoader(TextureLoader, "/stacy.jpg")
-  const actions = useRef()
   const [mixer] = useState(() => new THREE.AnimationMixer())
-
-  useEffect(() => {
-    actions.current = {
-      pockets: mixer.clipAction(gltf.animations[0], group.current),
-      rope: mixer.clipAction(gltf.animations[1], group.current),
-      swingdance: mixer.clipAction(gltf.animations[2], group.current),
-      jump: mixer.clipAction(gltf.animations[3], group.current),
-      react: mixer.clipAction(gltf.animations[4], group.current),
-      shrug: mixer.clipAction(gltf.animations[5], group.current),
-      wave: mixer.clipAction(gltf.animations[6], group.current),
-      golf: mixer.clipAction(gltf.animations[7], group.current),
-      idle: mixer.clipAction(gltf.animations[8], group.current)
-    }
-    //actions.current.idle.play()
-  }, [mixer, gltf])
 
   useFrame((state, delta) => {
     mixer.update(delta)
-    shoulder && moveJoint(props.dispositivos[0].q, shoulder)
-    arm && moveJoint(props.dispositivos[1].q, arm)
-    hand && moveJoint(props.dispositivos[2].q, hand)
+    shoulder && moveJoint(props.dispositivos[0].q, shoulder, props.dispatch)
+    arm && moveJoint(props.dispositivos[1].q, arm, props.dispatch)
+    hand && moveJoint(props.dispositivos[2].q, hand, props.dispatch)
   })
 
   return (
@@ -172,7 +170,7 @@ const Plane = ({ ...props }) => {
       <planeGeometry attach="geometry" args={[5000, 5000, 1, 1]} />
       <meshLambertMaterial
         attach="material"
-        color="#272727"
+        color="#22372B"
         transparent
         opacity={0.2}
       />
@@ -183,55 +181,72 @@ const Plane = ({ ...props }) => {
 const App = () => {
   const d = 8.25
   const [mousePosition, setMousePosition] = useState({})
+  const dispatch = useDispatch()
   const dispositivos = useSelector(state => state.dispositivos.dispositivos)
+  const segmentos = useSelector(state => state.segmentos.segmentos)
+  console.log(segmentos)
   if (_.isEmpty(dispositivos)) {
     return null
   }
+  
   return (
-    <>
-      <div className="bg" />
-      <Canvas
-        onMouseMove={e => setMousePosition(getMousePos(e))}
-        shadowMap
-        pixelRatio={window.devicePixelRatio}
-        camera={{ position: [0, -3, 30] }}
-        gl2
-        id="canvas-esqueleto"
-      >
-        <hemisphereLight
-          skyColor={"black"}
-          groundColor={0xffffff}
-          intensity={0.68}
-          position={[0, 50, 0]}
-        />
-        <directionalLight
-          position={[-8, 12, 8]}
-          shadowCameraLeft={d * -1}
-          shadowCameraBottom={d * -1}
-          shadowCameraRight={d}
-          shadowCameraTop={d}
-          shadowCameraNear={0.1}
-          shadowCameraFar={1500}
-          castShadow
-        />
-        <Plane rotation={[-0.5 * Math.PI, 0, 0]} position={[0, -11, 0]} />
-        <Suspense fallback={null}>
-          <Character
-            mousePosition={mousePosition}
-            position={[0, -11, 0]}
-            scale={[7, 7, 7]}
-            dispositivos={dispositivos}
+    <div className="contenedor-esqueleto">
+      <div className="visualizacion">
+        <div className="bg" />
+        <Canvas
+          onMouseMove={e => setMousePosition(getMousePos(e))}
+          shadowMap
+          pixelRatio={window.devicePixelRatio}
+          camera={{ position: [0, 0, 15] }}
+          gl2
+          id="canvas-esqueleto"
+        >
+          <hemisphereLight
+            skyColor={"black"}
+            groundColor={0xffffff}
+            intensity={0.68}
+            position={[0, 50, 0]}
           />
-        </Suspense>
-        <Controls
-          dampingFactor={0.5}
-          rotateSpeed={1}
-          maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 2}
-        />
-      </Canvas>
-      <div className="layer" />
-    </>
+          <directionalLight
+            position={[-8, 12, 8]}
+            shadowCameraLeft={d * -1}
+            shadowCameraBottom={d * -1}
+            shadowCameraRight={d}
+            shadowCameraTop={d}
+            shadowCameraNear={0.1}
+            shadowCameraFar={1500}
+            castShadow
+          />
+          <Plane rotation={[-0.5 * Math.PI, 0, 0]} position={[0, -11, 0]} />
+          <Suspense fallback={null}>
+            <Character
+              mousePosition={mousePosition}
+              position={[0, -7, 0]}
+              scale={[7, 7, 7]}
+              dispositivos={dispositivos}
+              dispatch={dispatch}
+            />
+          </Suspense>
+          <Controls
+            dampingFactor={0.5}
+            rotateSpeed={1}
+            maxPolarAngle={Math.PI / 2}
+            minPolarAngle={Math.PI / 2}
+          />
+        </Canvas>
+        <div className="layer" />
+      </div>
+      <div className="barra-derecha">
+        {segmentos.map(({nombre, angulos}) => (
+          <div className="angulos-segmento">
+            <h3>{nombre}</h3>
+            <ul>
+              {angulos.filter(a => a.nombre !== '').map(a => <li>{a.nombre}: {rad2deg(a.valor)}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }
 

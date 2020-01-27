@@ -12,7 +12,8 @@ export default function(state = initialState, action) {
     case FIJAR_ESTADO_CONEXION: {
       return {
         ...state,
-        estado: action.payload
+        estado: action.payload,
+        activa: true
       }
     }
     default:

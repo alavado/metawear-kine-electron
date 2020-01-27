@@ -15,9 +15,7 @@ export const obtenerAngulosDesdeCuaternionMetawear = q => {
   const cosy_cosp = 1 - 2 * (y * y + z * z)
   const yaw = Math.atan2(siny_cosp, cosy_cosp)
 
-  return [
-    Math.round(100 * roll * 360 / 6.28) / 100,
-    Math.round(100 * pitch * 360 / 6.28) / 100,
-    Math.round(100 * yaw * 360 / 6.28) / 100
-  ]
+  return [rad2deg(roll), rad2deg(pitch), rad2deg(yaw)]
 }
+
+export const rad2deg = rad => Math.round(10 * rad * 360 / 6.28) / 10

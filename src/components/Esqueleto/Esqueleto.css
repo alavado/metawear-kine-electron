@@ -7,3 +7,24 @@
   min-width: 300px;
   min-height: 500px;
 }
+
+.contenedor-esqueleto {
+  display: flex;
+  width: 100%;
+}
+
+.contenedor-esqueleto .visualizacion {
+  flex: 1;
+}
+
+.contenedor-esqueleto .barra-derecha {
+  width: 300px;
+  background-color: #3E5D58;
+  color: white;
+  padding: 16px;
+}
+
+.contenedor-esqueleto .barra-derecha h3 {
+  text-transform: capitalize;
+  margin-top: 16px;
+}
