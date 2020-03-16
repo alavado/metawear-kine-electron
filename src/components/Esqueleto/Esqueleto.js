@@ -8,7 +8,7 @@ import { TextureLoader } from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import './Esqueleto.css'
 import _ from 'lodash'
-import { actualizarAngulosSegmento } from '../../redux/actions'
+import { actualizarAngulosSegmento, actualizarCuaternionSegmento } from '../../redux/actions'
 import { rad2deg } from '../../helpers/cuaterniones'
 
 function getMousePos(e) {
@@ -58,24 +58,39 @@ function getMouseDegrees(x, y, degreeLimit) {
   return { x: dx, y: dy }
 }
 
-function moveJoint(rot, joint, dispatch) {
+function moveJoint(rot, joint, dispatch, otros = []) {
   const m4 = new Matrix4()
   const { x, y, z, w } = rot
-  m4.makeRotationFromQuaternion(new Quaternion(y, x, -z, w))
+  // const cuaternionSegmento = new Quaternion(y, x, -z, w)
+  let cuaternionSegmento = otros.reduce((prev, { q }) => {
+    return (new Quaternion(q.y, q.x, -q.z, q.w).inverse()).multiply(prev)
+  }, new Quaternion(y, x, -z, w))
+  if (otros.length === 2) {
+    cuaternionSegmento = new Quaternion(y, x, -z, w).normalize()
+    const cuaternionAntebrazo = new Quaternion(otros[0].q.y, otros[0].q.x, -otros[0].q.z, otros[0].q.w).normalize()
+    const cuaternionBrazo = new Quaternion(otros[1].q.y, otros[1].q.x, -otros[1].q.z, otros[1].q.w).normalize()
+    const cuaternionAntebrazoCorregido = cuaternionBrazo.inverse().multiply(cuaternionAntebrazo).normalize()
+    cuaternionSegmento = cuaternionBrazo.inverse().multiply(cuaternionAntebrazoCorregido.inverse().multiply(cuaternionSegmento))
+  }
+  m4.makeRotationFromQuaternion(cuaternionSegmento)
   joint.quaternion.setFromRotationMatrix(m4)
   const { _x, _y, _z } = joint.rotation
   switch(joint.name) {
     case 'mixamorigRightHand':
       dispatch(actualizarAngulosSegmento('mano derecha', [_x, _y, _z]))
+      dispatch(actualizarCuaternionSegmento('mano derecha', cuaternionSegmento))
       break
     case 'mixamorigRightForeArm':
       dispatch(actualizarAngulosSegmento('antebrazo derecho', [_x, _y, _z]))
+      dispatch(actualizarCuaternionSegmento('antebrazo derecho', cuaternionSegmento))
       break
     case 'mixamorigRightArm':
       dispatch(actualizarAngulosSegmento('brazo derecho', [_x, _y, _z]))
+      dispatch(actualizarCuaternionSegmento('brazo derecho', cuaternionSegmento))
       break
     case 'mixamorigRightShoulder':
       dispatch(actualizarAngulosSegmento('tronco', [_x, _y, _z]))
+      dispatch(actualizarCuaternionSegmento('tronco', cuaternionSegmento))
       break
   }
 }
@@ -132,9 +147,10 @@ const Character = props => {
 
   useFrame((state, delta) => {
     mixer.update(delta)
-    shoulder && moveJoint(props.dispositivos[3].q, shoulder, props.dispatch)
-    arm && moveJoint(props.dispositivos[1].q, arm, props.dispatch)
-    hand && moveJoint(props.dispositivos[2].q, hand, props.dispatch)
+    const { dispositivos, dispatch } = props
+    shoulder && moveJoint(dispositivos[2].q, shoulder, dispatch)
+    arm && moveJoint(dispositivos[1].q, arm, dispatch, [dispositivos[2]])
+    hand && moveJoint(dispositivos[0].q, hand, dispatch, [dispositivos[1], dispositivos[2]])
     // waist && moveJoint(props.dispositivos[0].q, waist, props.dispatch)
   })
 
@@ -192,8 +208,8 @@ const App = () => {
   const d = 8.25
   const [mousePosition, setMousePosition] = useState({})
   const dispatch = useDispatch()
-  const dispositivos = useSelector(state => state.dispositivos.dispositivos)
-  const segmentos = useSelector(state => state.segmentos.segmentos)
+  const { dispositivos } = useSelector(state => state.dispositivos)
+  const { segmentos } = useSelector(state => state.segmentos)
 
   // hay que orientar el cuerpo basados en el pecho
   console.log(segmentos)
@@ -253,7 +269,9 @@ const App = () => {
           <div className="angulos-segmento">
             <h3>{nombre}</h3>
             <ul>
-              {angulos.filter(a => a.nombre !== '').map(a => <li><h4>{a.nombre}</h4><p>{rad2deg(a.valor)} °</p></li>)}
+              {angulos.filter(a => a.nombre !== '').map(a => (
+                <li><h4>{a.nombre}</h4><p>{rad2deg(a.valor)} °</p></li>)
+              )}
             </ul>
           </div>
         ))}
