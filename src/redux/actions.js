@@ -1,4 +1,4 @@
-import { ACTUALIZAR_DISPOSITIVOS, FIJAR_ESTADO_CONEXION, ACTUALIZAR_ANGULOS_SEGMENTO } from "./actionTypes";
+import { ACTUALIZAR_DISPOSITIVOS, FIJAR_ESTADO_CONEXION, ACTUALIZAR_ANGULOS_SEGMENTO, ACTUALIZAR_CUATERNION_SEGMENTO } from "./actionTypes";
 
 export const fijarEstadoConexion = estado => ({
   type: FIJAR_ESTADO_CONEXION,
@@ -45,5 +45,12 @@ export const actualizarAngulosSegmento = (nombre, angulos) => {
   return {
     type: ACTUALIZAR_ANGULOS_SEGMENTO,
     payload: { nombre, angulos: angulosFormateados }
+  }
+}
+
+export const actualizarCuaternionSegmento = (nombre, cuaternion) => {
+  return {
+    type: ACTUALIZAR_CUATERNION_SEGMENTO,
+    payload: { nombre, cuaternion }
   }
 }

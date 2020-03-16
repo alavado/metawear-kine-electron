@@ -1,67 +1,35 @@
-import { ACTUALIZAR_ANGULOS_SEGMENTO } from "../actionTypes"
+import { ACTUALIZAR_ANGULOS_SEGMENTO, ACTUALIZAR_CUATERNION_SEGMENTO } from "../actionTypes"
+import { Quaternion } from "three";
 
 const initialState = {
   segmentos: [
     {
       nombre: 'mano derecha',
       angulos: [
-        {
-          nombre: 'Flexión / extensión',
-          eje: 'x',
-          valor: 0
-        },
-        {
-          nombre: '',
-          eje: 'y',
-          valor: 0
-        },
-        {
-          nombre: 'Radialización / ulnarización',
-          eje: 'z',
-          valor: 0
-        }
-      ]
+        { eje: 'x', valor: 0, nombre: 'Flexión / extensión' },
+        { eje: 'y', valor: 0, nombre: '' },
+        { eje: 'z', valor: 0, nombre: 'Radialización / ulnarización' }
+      ],
+      cuaternion: new Quaternion()
     },
     {
       nombre: 'antebrazo derecho',
       angulos: [
-        {
-          nombre: '',
-          eje: 'x',
-          valor: 0
-        },
-        {
-          nombre: 'Flexión / extensión',
-          eje: 'y',
-          valor: 0
-        },
-        {
-          nombre: 'Pronación / supinación',
-          eje: 'z',
-          valor: 0
-        }
-      ]
+        { eje: 'x', valor: 0, nombre: '' },
+        { eje: 'y', valor: 0, nombre: 'Flexión / extensión' },
+        { eje: 'z', valor: 0, nombre: 'Pronación / supinación' }
+      ],
+      cuaternion: new Quaternion()
     },
     {
       nombre: 'brazo derecho',
       angulos: [
-        {
-          nombre: 'Abducción / aducción',
-          eje: 'x',
-          valor: 0
-        },
-        {
-          nombre: 'Flexión / extensión',
-          eje: 'y',
-          valor: 0
-        },
-        {
-          nombre: 'Rotación interna / externa',
-          eje: 'z',
-          valor: 0
-        }
-      ]
-    },
+        { eje: 'x', valor: 0, nombre: 'Abducción / aducción' },
+        { eje: 'y', valor: 0, nombre: 'Flexión / extensión' },
+        { eje: 'z', valor: 0, nombre: 'Rotación interna / externa' }
+      ],
+      cuaternion: new Quaternion()
+    }
   ]
 }
 
@@ -74,8 +42,22 @@ export default function(state = initialState, action) {
         segmentos: [
           ...state.segmentos.filter(s => s.nombre !== nombre),
           {
+            ...state.segmentos.find(s => s.nombre === nombre),
             nombre,
             angulos
+          }
+        ]
+      }
+    }
+    case ACTUALIZAR_CUATERNION_SEGMENTO: {
+      const { nombre, cuaternion } = action.payload
+      return {
+        ...state,
+        segmentos: [
+          ...state.segmentos.filter(s => s.nombre !== nombre),
+          {
+            ...state.segmentos.find(s => s.nombre === nombre),
+            cuaternion
           }
         ]
       }
