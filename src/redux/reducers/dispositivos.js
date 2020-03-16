@@ -12,9 +12,7 @@ export default function(state = initialState, action) {
         t: Date.now(),
         dispositivos: action.payload
       }]
-      if (historial.length >= 100) {
-        historial.shift()
-      }
+      historial.length >= 100 && historial.shift()
       return {
         ...state,
         dispositivos: action.payload,

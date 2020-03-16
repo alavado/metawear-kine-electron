@@ -20,61 +20,26 @@ export const actualizarDispositivos = dispositivos => ({
 
 export const actualizarAngulosSegmento = (nombre, angulos) => {
   let angulosFormateados
+  const [x, y, z] = angulos
   if (nombre === 'mano derecha') {
     angulosFormateados = [
-      {
-        nombre: 'Flexión / extensión',
-        eje: 'x',
-        valor: angulos[0]
-      },
-      {
-        nombre: '',
-        eje: 'y',
-        valor: angulos[1]
-      },
-      {
-        nombre: 'Radialización / ulnarización',
-        eje: 'z',
-        valor: angulos[2]
-      }
+      { eje: 'x', valor: x, nombre: 'Flexión / extensión' },
+      { eje: 'y', valor: y, nombre: '' },
+      { eje: 'z', valor: z, nombre: 'Radialización / ulnarización' }
     ]
   }
   else if (nombre === 'antebrazo derecho') {
     angulosFormateados = [
-      {
-        nombre: 'Pronación / supinación',
-        eje: 'x',
-        valor: angulos[0]
-      },
-      {
-        nombre: '',
-        eje: 'y',
-        valor: angulos[1]
-      },
-      {
-        nombre: 'Flexión / extensión',
-        eje: 'z',
-        valor: angulos[2]
-      }
+      { eje: 'x', valor: x, nombre: 'Pronación / supinación' },
+      { eje: 'y', valor: y, nombre: '' },
+      { eje: 'z', valor: z, nombre: 'Flexión / extensión' }
     ]
   }
   else {
     angulosFormateados = [
-      {
-        nombre: 'Abducción / aducción',
-        eje: 'x',
-        valor: angulos[0]
-      },
-      {
-        nombre: 'Flexión / extensión',
-        eje: 'y',
-        valor: angulos[1]
-      },
-      {
-        nombre: 'Rot. interna / externa',
-        eje: 'z',
-        valor: angulos[2]
-      }
+      { eje: 'x', valor: x, nombre: 'Abducción / aducción' },
+      { eje: 'y', valor: y, nombre: 'Flexión / extensión' },
+      { eje: 'z', valor: z, nombre: 'Rot. interna / externa' }
     ]
   }
   return {
