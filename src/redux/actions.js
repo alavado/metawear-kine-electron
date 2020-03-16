@@ -19,7 +19,6 @@ export const actualizarDispositivos = dispositivos => ({
 })
 
 export const actualizarAngulosSegmento = (nombre, angulos) => {
-  console.log({nombre, angulos})
   let angulosFormateados
   if (nombre === 'mano derecha') {
     angulosFormateados = [

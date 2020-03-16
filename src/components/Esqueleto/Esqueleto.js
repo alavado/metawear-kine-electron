@@ -74,6 +74,9 @@ function moveJoint(rot, joint, dispatch) {
     case 'mixamorigRightArm':
       dispatch(actualizarAngulosSegmento('brazo derecho', [_x, _y, _z]))
       break
+    case 'mixamorigRightShoulder':
+      dispatch(actualizarAngulosSegmento('tronco', [_x, _y, _z]))
+      break
   }
 }
 
@@ -99,19 +102,25 @@ const Character = props => {
     }
     gltf.scene.traverse(o => {
       // Reference the neck and waist bones
-      if (o.isBone && o.name === "mixamorigNeck") {
+      if (o.isBone) {
+        console.log(o.name)
+      }
+      else {
+        return
+      }
+      if (o.name === "mixamorigNeck") {
         setNeck(o)
       }
-      if (o.isBone && o.name === "mixamorigSpine") {
+      else if (o.name === "mixamorigRightShoulder") {
         setWaist(o)
       }
-      if (o.isBone && o.name === "mixamorigRightArm") {
+      else if (o.name === "mixamorigRightArm") {
         setShoulder(o)
       }
-      if (o.isBone && o.name === "mixamorigRightForeArm") {
+      if (o.name === "mixamorigRightForeArm") {
         setArm(o)
       }
-      if (o.isBone && o.name === "mixamorigRightHand") {
+      if (o.name === "mixamorigRightHand") {
         setHand(o)
       }
     })
@@ -123,9 +132,10 @@ const Character = props => {
 
   useFrame((state, delta) => {
     mixer.update(delta)
-    shoulder && moveJoint(props.dispositivos[0].q, shoulder, props.dispatch)
+    shoulder && moveJoint(props.dispositivos[3].q, shoulder, props.dispatch)
     arm && moveJoint(props.dispositivos[1].q, arm, props.dispatch)
     hand && moveJoint(props.dispositivos[2].q, hand, props.dispatch)
+    // waist && moveJoint(props.dispositivos[0].q, waist, props.dispatch)
   })
 
   return (
@@ -184,6 +194,8 @@ const App = () => {
   const dispatch = useDispatch()
   const dispositivos = useSelector(state => state.dispositivos.dispositivos)
   const segmentos = useSelector(state => state.segmentos.segmentos)
+
+  // hay que orientar el cuerpo basados en el pecho
   console.log(segmentos)
   if (_.isEmpty(dispositivos)) {
     return null
