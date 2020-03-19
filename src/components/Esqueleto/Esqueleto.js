@@ -266,7 +266,7 @@ const App = () => {
             <h3>{nombre}</h3>
             <ul>
               {angulos.filter(a => a.nombre !== '').map(a => (
-                <li><h4>{a.nombre}</h4><p>{rad2deg(a.valor)} °</p></li>)
+                <li key={a.nombre}><h4>{a.nombre}</h4><p>{rad2deg(a.valor)} °</p></li>)
               )}
             </ul>
           </div>
