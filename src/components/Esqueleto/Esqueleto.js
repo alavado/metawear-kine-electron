@@ -61,16 +61,18 @@ function getMouseDegrees(x, y, degreeLimit) {
 function moveJoint(rot, joint, dispatch, otros = []) {
   const m4 = new Matrix4()
   const { x, y, z, w } = rot
-  // const cuaternionSegmento = new Quaternion(y, x, -z, w)
-  let cuaternionSegmento = otros.reduce((prev, { q }) => {
-    return (new Quaternion(q.y, q.x, -q.z, q.w).inverse()).multiply(prev)
-  }, new Quaternion(y, x, -z, w))
-  if (otros.length === 2) {
-    cuaternionSegmento = new Quaternion(y, x, -z, w).normalize()
-    const cuaternionAntebrazo = new Quaternion(otros[0].q.y, otros[0].q.x, -otros[0].q.z, otros[0].q.w).normalize()
-    const cuaternionBrazo = new Quaternion(otros[1].q.y, otros[1].q.x, -otros[1].q.z, otros[1].q.w).normalize()
-    const cuaternionAntebrazoCorregido = cuaternionBrazo.inverse().multiply(cuaternionAntebrazo).normalize()
-    cuaternionSegmento = cuaternionBrazo.inverse().multiply(cuaternionAntebrazoCorregido.inverse().multiply(cuaternionSegmento))
+  let cuaternionSegmento = new Quaternion(y, x, -z, w)
+  if (otros.length === 1) {
+    const cuaternionBrazo = new Quaternion(otros[0].q.y, otros[0].q.x, -otros[0].q.z, otros[0].q.w)
+    cuaternionSegmento = cuaternionSegmento.normalize().multiply(cuaternionBrazo.conjugate().normalize())
+  }
+  else if (otros.length === 2) {
+    const cuaternionAntebrazo = new Quaternion(otros[0].q.y, otros[0].q.x, -otros[0].q.z, otros[0].q.w)
+    const cuaternionBrazo = new Quaternion(otros[1].q.y, otros[1].q.x, -otros[1].q.z, otros[1].q.w)
+    const cuaternionAntebrazoCorregido = cuaternionAntebrazo.normalize().multiply(cuaternionBrazo.conjugate().normalize())
+    const cuaternionMuñecaCorregido = cuaternionSegmento.normalize().multiply(cuaternionAntebrazoCorregido.conjugate().normalize())
+    cuaternionSegmento = cuaternionMuñecaCorregido.normalize().multiply(cuaternionBrazo.conjugate().normalize())
+    // cuaternionSegmento = (cuaternionBrazo.conjugate().multiply(cuaternionMuñecaCorregido)).multiply(cuaternionBrazo)
   }
   m4.makeRotationFromQuaternion(cuaternionSegmento)
   joint.quaternion.setFromRotationMatrix(m4)
@@ -117,10 +119,7 @@ const Character = props => {
     }
     gltf.scene.traverse(o => {
       // Reference the neck and waist bones
-      if (o.isBone) {
-        console.log(o.name)
-      }
-      else {
+      if (!o.isBone) {
         return
       }
       if (o.name === "mixamorigNeck") {
@@ -212,7 +211,6 @@ const App = () => {
   const { segmentos } = useSelector(state => state.segmentos)
 
   // hay que orientar el cuerpo basados en el pecho
-  console.log(segmentos)
   if (_.isEmpty(dispositivos)) {
     return null
   }
