@@ -63,16 +63,14 @@ function moveJoint(rot, joint, dispatch, otros = []) {
   const { x, y, z, w } = rot
   let cuaternionSegmento = new Quaternion(y, x, -z, w)
   if (otros.length === 1) {
-    const cuaternionBrazo = new Quaternion(otros[0].q.y, otros[0].q.x, -otros[0].q.z, otros[0].q.w)
-    cuaternionSegmento = cuaternionSegmento.normalize().multiply(cuaternionBrazo.conjugate().normalize())
+    const cuaternionBrazo = new Quaternion(otros[0].y, otros[0].x, -otros[0].z, otros[0].w)
+    cuaternionSegmento = cuaternionBrazo.conjugate().multiply(cuaternionSegmento)
   }
   else if (otros.length === 2) {
-    const cuaternionAntebrazo = new Quaternion(otros[0].q.y, otros[0].q.x, -otros[0].q.z, otros[0].q.w)
-    const cuaternionBrazo = new Quaternion(otros[1].q.y, otros[1].q.x, -otros[1].q.z, otros[1].q.w)
-    const cuaternionAntebrazoCorregido = cuaternionAntebrazo.normalize().multiply(cuaternionBrazo.conjugate().normalize())
-    const cuaternionMuñecaCorregido = cuaternionSegmento.normalize().multiply(cuaternionAntebrazoCorregido.conjugate().normalize())
-    cuaternionSegmento = cuaternionMuñecaCorregido.normalize().multiply(cuaternionBrazo.conjugate().normalize())
-    // cuaternionSegmento = (cuaternionBrazo.conjugate().multiply(cuaternionMuñecaCorregido)).multiply(cuaternionBrazo)
+    const cuaternionAntebrazo = new Quaternion(otros[0].y, otros[0].x, -otros[0].z, otros[0].w)
+    const cuaternionBrazo = new Quaternion(otros[1].y, otros[1].x, -otros[1].z, otros[1].w)
+    const cuaternionAntebrazoCorregido = cuaternionBrazo.conjugate().multiply(cuaternionAntebrazo)
+    cuaternionSegmento = (new Quaternion(otros[1].y, otros[1].x, -otros[1].z, otros[1].w)).conjugate().multiply(cuaternionAntebrazoCorregido.conjugate().multiply(cuaternionSegmento))
   }
   m4.makeRotationFromQuaternion(cuaternionSegmento)
   joint.quaternion.setFromRotationMatrix(m4)
@@ -148,8 +146,8 @@ const Character = props => {
     mixer.update(delta)
     const { dispositivos, dispatch } = props
     shoulder && moveJoint(dispositivos[2].q, shoulder, dispatch)
-    arm && moveJoint(dispositivos[1].q, arm, dispatch, [dispositivos[2]])
-    hand && moveJoint(dispositivos[0].q, hand, dispatch, [dispositivos[1], dispositivos[2]])
+    arm && moveJoint(dispositivos[1].q, arm, dispatch, [dispositivos[2].q])
+    hand && moveJoint(dispositivos[0].q, hand, dispatch, [dispositivos[1].q, dispositivos[2].q])
     // waist && moveJoint(props.dispositivos[0].q, waist, props.dispatch)
   })
 
