@@ -7,7 +7,7 @@ const Paciente = mongoose.model('Paciente')
 const RootQueryType = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
-    paciente: {
+    pacientes: {
       type: new GraphQLList(PacienteType),
       resolve() {
         return Paciente.find({})
