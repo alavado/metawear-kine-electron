@@ -10,9 +10,12 @@ const Pacientes = () => {
 
   return (
     <div>
-      {data && data.pacientes.map(({ id, nombre }) => (
-        <Link to={`/paciente/${id}`}>{nombre}</Link>
-      ))}
+      <div>
+        {data && data.pacientes.map(({ id, nombre }) => (
+          <Link to={`/paciente/${id}`}>{nombre}</Link>
+        ))}
+      </div>
+      <Link to={'/nuevo_paciente'}>Nuevo paciente</Link>
     </div>
   )
 }
