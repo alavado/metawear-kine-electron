@@ -1,1 +1,2 @@
 require('./paciente')
+require('./prueba')

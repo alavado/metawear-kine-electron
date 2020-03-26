@@ -8,6 +8,7 @@ import { NavLink as Link, Switch, Route } from 'react-router-dom'
 import { w3cwebsocket } from 'websocket'
 import { useSelector, useDispatch } from 'react-redux'
 import { fijarEstadoConexion, actualizarDispositivos } from '../../redux/actions'
+import SeleccionPrueba from '../SeleccionPrueba'
 
 const App = () => {
 
@@ -53,6 +54,7 @@ const App = () => {
         </nav>
         <Switch>
           <Route path="/pacientes" component={Pacientes} />
+          <Route path="/seleccion_prueba" component={SeleccionPrueba} />
           <Route path="/paciente/:id" component={FichaPaciente} />
           <Route path="/dispositivos" component={() => (
             <Conexion

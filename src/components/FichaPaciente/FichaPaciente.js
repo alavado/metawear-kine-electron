@@ -1,6 +1,6 @@
 import React from 'react'
 import './FichaPaciente.css'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 const FichaPaciente = () => {
 
@@ -9,6 +9,10 @@ const FichaPaciente = () => {
   return (
     <div>
       {id}
+      <Link to="/seleccion_prueba">Nueva prueba</Link>
+      <div>
+        <h1>Historial</h1>
+      </div>
     </div>
   )
 }
