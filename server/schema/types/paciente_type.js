@@ -6,6 +6,7 @@ const Paciente = mongoose.model('Paciente')
 const PacienteType = new GraphQLObjectType({
   name: 'PacienteType',
   fields: () => ({
+    id: { type: GraphQLID },
     nombre: { type: GraphQLString }
   })
 })

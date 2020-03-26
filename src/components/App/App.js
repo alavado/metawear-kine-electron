@@ -3,6 +3,7 @@ import './App.css'
 import Conexion from '../Conexion'
 import Esqueleto from '../Esqueleto'
 import Pacientes from '../Pacientes'
+import FichaPaciente from '../FichaPaciente'
 import { NavLink as Link, Switch, Route } from 'react-router-dom'
 import { w3cwebsocket } from 'websocket'
 import { useSelector, useDispatch } from 'react-redux'
@@ -52,6 +53,7 @@ const App = () => {
         </nav>
         <Switch>
           <Route path="/pacientes" component={Pacientes} />
+          <Route path="/paciente/:id" component={FichaPaciente} />
           <Route path="/dispositivos" component={() => (
             <Conexion
               conectar={conectarConRaspberryPi}
