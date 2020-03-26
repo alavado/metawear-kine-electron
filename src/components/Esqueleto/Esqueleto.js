@@ -109,11 +109,12 @@ const Character = props => {
     // cached scene. Next time the component runs these two objects will be gone.
     // Since the gltf object is a permenently cached object, we can extend it here
     // and extend it with all the data we may need.
+    console.log({gltf})
     if (!gltf.bones) {
       gltf.bones = gltf.scene.children[0].children[0]
     }
     if (!gltf.skeleton) {
-      gltf.skeleton = gltf.scene.children[0].children[1].skeleton
+      gltf.skeleton = gltf.scene.children[0].children[0].skeleton
     }
     gltf.scene.traverse(o => {
       // Reference the neck and waist bones

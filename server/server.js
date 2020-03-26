@@ -1,1 +1,22 @@
-// aqui hay que hacer un servidor express graphql
+const express = require('express')
+const mongoose = require('mongoose')
+// const expressGraphQL = require('express-graphql')
+// const schema = require('./schema/schema')
+const app = express()
+const bodyParser = require('body-parser')
+
+const { mongoURI } = require('./secret')
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Conectado a MongoDB Atlas'))
+  .catch(err => console.error('Error conectando a MongoDB Atlas', err))
+
+// app.use('/graphql', expressGraphQL({
+//   schema,
+//   graphiql: true
+// }))
+
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.listen(4000, () => {
+  console.log('Escuchando puerto:', 4000)
+})

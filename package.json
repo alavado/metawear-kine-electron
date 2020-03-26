@@ -10,6 +10,7 @@
     "chart.js": "^2.9.3",
     "electron-is-dev": "^1.1.0",
     "lodash": "^4.17.15",
+    "mongoose": "^5.9.6",
     "quaternion": "^1.1.0",
     "react": "^16.12.0",
     "react-chartjs-2": "^2.8.0",
@@ -27,6 +28,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "server": "nodemon server/server.js --ignore src --ignore server/images --ignore server/tools",
     "electron-dev": "cross-env concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {

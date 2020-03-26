@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './App.css'
 import Conexion from '../Conexion'
 import Esqueleto from '../Esqueleto'
+import Pacientes from '../Pacientes'
 import { NavLink as Link, Switch, Route } from 'react-router-dom'
 import { w3cwebsocket } from 'websocket'
 import { useSelector, useDispatch } from 'react-redux'
@@ -45,10 +46,12 @@ const App = () => {
       <div className="contenedor-principal">
         <nav>
           <h1>ACHS Kine</h1>
+          <Link to="/pacientes" activeClassName="link-activo">Pacientes</Link>
           <Link to="/dispositivos" activeClassName="link-activo">Conexión</Link>
           <Link to="/esqueleto" activeClassName="link-activo">Visualización 3D</Link>
         </nav>
         <Switch>
+          <Route path="/pacientes" component={Pacientes} />
           <Route path="/dispositivos" component={() => (
             <Conexion
               conectar={conectarConRaspberryPi}
