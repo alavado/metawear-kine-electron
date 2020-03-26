@@ -9,6 +9,7 @@ import { w3cwebsocket } from 'websocket'
 import { useSelector, useDispatch } from 'react-redux'
 import { fijarEstadoConexion, actualizarDispositivos } from '../../redux/actions'
 import SeleccionPrueba from '../SeleccionPrueba'
+import FormularioNuevoPaciente from '../FormularioNuevoPaciente'
 
 const App = () => {
 
@@ -54,6 +55,7 @@ const App = () => {
         </nav>
         <Switch>
           <Route path="/pacientes" component={Pacientes} />
+          <Route path="/nuevo_paciente" component={FormularioNuevoPaciente} />
           <Route path="/seleccion_prueba" component={SeleccionPrueba} />
           <Route path="/paciente/:id" component={FichaPaciente} />
           <Route path="/dispositivos" component={() => (
