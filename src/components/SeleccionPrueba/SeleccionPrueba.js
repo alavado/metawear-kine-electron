@@ -6,12 +6,19 @@ import './SeleccionPrueba.css'
 
 const SeleccionPrueba = () => {
 
-  const { data } = useQuery(queryPruebas)
+  const { loading, data } = useQuery(queryPruebas)
+
+  if (loading) {
+    return <p>Cargando...</p>
+  }
 
   return (
     <div>
       <h1>Seleccione la prueba</h1>
-      {data && data.pruebas.map(({ id, nombre }) => <p><Link>{nombre}</Link></p>)}
+      {data.pruebas.map(({ id, nombre }) => (
+        <p><Link to={`/medicion/${id}`}>{nombre}</Link></p>
+      ))}
+      <p><Link to="/nueva_prueba">Nueva</Link></p>
     </div>
   )
 }

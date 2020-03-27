@@ -23,7 +23,7 @@ const FichaPaciente = () => {
         <div>{sexo}</div>
         <div>{fechaNacimiento}</div>
         <div>{diagnostico}</div>
-        <Link to="/seleccion_prueba">Nueva prueba</Link>
+        <Link to="/medicion/seleccion_prueba">Nueva medición</Link>
         <div>
           <h1>Historial</h1>
         </div>

@@ -10,6 +10,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fijarEstadoConexion, actualizarDispositivos } from '../../redux/actions'
 import SeleccionPrueba from '../SeleccionPrueba'
 import FormularioNuevoPaciente from '../FormularioNuevoPaciente'
+import FormularioNuevaPrueba from '../FormularioNuevaPrueba'
+import Medicion from '../Medicion'
 
 const App = () => {
 
@@ -57,7 +59,9 @@ const App = () => {
           <Switch>
             <Route path="/pacientes" component={Pacientes} />
             <Route path="/nuevo_paciente" component={FormularioNuevoPaciente} />
-            <Route path="/seleccion_prueba" component={SeleccionPrueba} />
+            <Route path="/medicion/seleccion_prueba" component={SeleccionPrueba} />
+            <Route path="/nueva_prueba" component={FormularioNuevaPrueba} />
+            <Route path="/medicion/:idprueba" component={Medicion} />
             <Route path="/paciente/:id" component={FichaPaciente} />
             <Route path="/dispositivos" component={() => (
               <Conexion
