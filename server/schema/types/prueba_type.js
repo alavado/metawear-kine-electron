@@ -1,6 +1,6 @@
 const graphql = require('graphql')
 const mongoose = require('mongoose')
-const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLList } = graphql
+const { GraphQLObjectType, GraphQLString, GraphQLID } = graphql
 const Prueba = mongoose.model('Prueba')
 
 const PruebaType = new GraphQLObjectType({

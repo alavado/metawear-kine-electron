@@ -1,4 +1,4 @@
-#contenedor-dispositivos {
+.Conexion__dispositivos {
   display: grid;
   gap: 16px;
   grid-template-columns: repeat(2, auto);
@@ -74,18 +74,18 @@
   margin-left: 120px;
 }
 
-#formulario-conexion {
+.Conexion__formulario_ip {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#formulario-conexion > input {
+.Conexion__formulario_ip > input {
   margin-top: 4px;
   text-align: center;
 }
 
-#formulario-conexion > button {
+.Conexion__formulario_ip > button {
   margin-top: 12px;
 }
 

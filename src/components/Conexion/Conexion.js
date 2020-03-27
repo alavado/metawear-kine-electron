@@ -14,15 +14,15 @@ const Conexion = ({conectar}) => {
   const [ipRaspberry, setIpRaspberry] = useState('192.168.0.21')
 
   return (
-    <section>
+    <section className="Conexion">
       {_.isEmpty(dispositivos) &&
-        <div id="formulario-conexion">
+        <div className="Conexion__formulario_ip">
           <label>IP de la Raspberry Pi</label>
           <input type="text" value={ipRaspberry} onChange={e => setIpRaspberry(e.target.value)} />
           <button onClick={() => conectar(ipRaspberry)}>Conectar</button>
         </div>
       }
-      <div id="contenedor-dispositivos">
+      <div className="Conexion__dispositivos">
         {dispositivos.map(({mac, q}, i) => {
           const [roll, pitch, yaw] = obtenerAngulosDesdeCuaternionMetawear(q)
           return (
@@ -51,12 +51,6 @@ const Conexion = ({conectar}) => {
                   <MiniDispositivo rot={new Quaternion(q.w, -q.x, q.y, -q.z).conjugate().toMatrix4()} />
                 </div>
               </div>
-              {/* <div className="cuaternion">
-                {rot[0].toLocaleString('de-DE')} +
-                ({(-rot[1]).toLocaleString('de-DE')})i +
-                ({rot[2].toLocaleString('de-DE')})j +
-                ({(-rot[3]).toLocaleString('de-DE')})k
-              </div> */}
             </div>
           )})
         }

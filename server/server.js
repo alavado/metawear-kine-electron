@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+mongoose.set('useCreateIndex', true)
 const models = require('./models')
 const expressGraphQL = require('express-graphql')
 const schema = require('./schema/schema')

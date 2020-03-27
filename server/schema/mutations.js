@@ -12,7 +12,11 @@ const mutation = new GraphQLObjectType({
     agregarPaciente: {
       type: PacienteType,
       args: {
-        nombre: { type: GraphQLString }
+        nombre: { type: GraphQLString },
+        bp: { type: GraphQLString },
+        sexo: { type: GraphQLString },
+        fechaNacimiento: { type: GraphQLString },
+        diagnostico: { type: GraphQLString }
       },
       resolve(parentValue, args) {
         return (new Paciente(args)).save()
