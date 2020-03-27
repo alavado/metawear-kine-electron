@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import mutacionAgregarPaciente from '../../graphql/mutations/agregarPaciente'
+import query from '../../graphql/queries/pacientes'
 import './FormularioNuevoPaciente.css'
+import { Redirect, useHistory } from 'react-router-dom'
 
 const FormularioNuevoPaciente = () => {
 
@@ -12,14 +14,16 @@ const FormularioNuevoPaciente = () => {
     fechaNacimiento: '',
     diagnostico: ''
   })
-  const [agregarPaciente] = useMutation(mutacionAgregarPaciente)
+  const [agregarPaciente] = useMutation(
+    mutacionAgregarPaciente,
+    { refetchQueries: [{ query }] }
+  )
+  const history = useHistory()
 
   const registrar = e => {
     e.preventDefault()
     agregarPaciente({ variables })
-      .then(({ data }) => {
-        console.log(data)
-      })
+      .then(() => history.push('/pacientes'))
   }
 
   const cambiarVariable = (nombre, valor) => {
