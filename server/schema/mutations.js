@@ -25,7 +25,8 @@ const mutation = new GraphQLObjectType({
     agregarPrueba: {
       type: PruebaType,
       args: {
-        nombre: { type: GraphQLString }
+        nombre: { type: GraphQLString },
+        canales: { type: new GraphQLList(GraphQLString) }
       },
       resolve(parentValue, args) {
         return (new Prueba(args)).save()

@@ -1,10 +1,56 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './FormularioNuevaPrueba.css'
+import { canales } from '../../config/canales'
+import agregarPruebaMutation from '../../graphql/mutations/agregarPrueba'
+import { useMutation } from '@apollo/react-hooks'
+import { useHistory } from 'react-router-dom'
 
 const FormularioNuevaPrueba = () => {
+
+  const [variables, setVariables] = useState({
+    nombre: '',
+    canales: []
+  })
+  const [agregarPrueba] = useMutation(agregarPruebaMutation)
+  const history = useHistory()
+
+  const enviarFormulario = e => {
+    e.preventDefault()
+    agregarPrueba({ variables })
+      .then(() => history.push('/seleccion_prueba'))
+  }
+
+  const toggleCanal = e => {
+    const { checked: estado, value: canal } = e.target
+    setVariables({ ...variables,
+      canales: estado ?
+      [...variables.canales, canal] :
+      variables.canales.filter(c => c !== canal)
+    })
+  }
+
   return (
     <div>
-      nueva prueba
+      <h1>Nueva prueba</h1>
+      <form onSubmit={enviarFormulario}>
+        <label>Nombre de la prueba</label>
+        <input
+          type="text"
+          value={variables.nombre}
+          onChange={e => setVariables({ ...variables, nombre: e.target.value })}
+        />
+        {canales.map(canal => (
+          <div key={`contenedor-canal-${canal}`}>
+            <input
+              type="checkbox"
+              value={canal}
+              onChange={toggleCanal}
+            />
+            <label>{canal}</label>
+          </div>
+        ))}
+        <input type="submit" value="Agregar" />
+      </form>
     </div>
   )
 }
