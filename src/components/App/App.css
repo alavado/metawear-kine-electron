@@ -122,3 +122,7 @@ button:hover {
 canvas:focus, a:focus {
   outline: none;
 }
+
+.App__principal {
+  padding: 32px;
+}

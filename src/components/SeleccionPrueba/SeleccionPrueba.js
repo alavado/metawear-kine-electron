@@ -6,7 +6,7 @@ import './SeleccionPrueba.css'
 
 const SeleccionPrueba = () => {
 
-  const { data, loading, error } = useQuery(queryPruebas)
+  const { data } = useQuery(queryPruebas)
 
   return (
     <div>

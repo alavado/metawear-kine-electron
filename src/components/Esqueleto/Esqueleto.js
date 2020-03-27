@@ -121,9 +121,6 @@ const Character = props => {
       if (!o.isBone) {
         return
       }
-      if (o.name === "mixamorigNeck") {
-        setNeck(o)
-      }
       else if (o.name === "mixamorigRightShoulder") {
         setWaist(o)
       }

@@ -6,13 +6,16 @@ import './Pacientes.css'
 
 const Pacientes = () => {
 
-  const { loading, data, error } = useQuery(queryPacientes)
+  const { data } = useQuery(queryPacientes)
 
   return (
-    <div>
+    <div className="Pacientes">
+      <h1>Pacientes</h1>
       <div>
         {data && data.pacientes.map(({ id, nombre }) => (
-          <Link to={`/paciente/${id}`}>{nombre}</Link>
+          <div className="Pacientes__fila_paciente">
+            <Link to={`/paciente/${id}`}>{nombre}</Link>
+          </div>
         ))}
       </div>
       <Link to={'/nuevo_paciente'}>Nuevo paciente</Link>

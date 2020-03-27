@@ -53,19 +53,21 @@ const App = () => {
           <Link to="/dispositivos" activeClassName="link-activo">Conexión</Link>
           <Link to="/esqueleto" activeClassName="link-activo">Visualización 3D</Link>
         </nav>
-        <Switch>
-          <Route path="/pacientes" component={Pacientes} />
-          <Route path="/nuevo_paciente" component={FormularioNuevoPaciente} />
-          <Route path="/seleccion_prueba" component={SeleccionPrueba} />
-          <Route path="/paciente/:id" component={FichaPaciente} />
-          <Route path="/dispositivos" component={() => (
-            <Conexion
-              conectar={conectarConRaspberryPi}
-              mensaje={mensaje}
-            />
-          )} />
-          <Route path="/esqueleto" component={Esqueleto} />
-        </Switch>
+        <main className="App__principal">
+          <Switch>
+            <Route path="/pacientes" component={Pacientes} />
+            <Route path="/nuevo_paciente" component={FormularioNuevoPaciente} />
+            <Route path="/seleccion_prueba" component={SeleccionPrueba} />
+            <Route path="/paciente/:id" component={FichaPaciente} />
+            <Route path="/dispositivos" component={() => (
+              <Conexion
+                conectar={conectarConRaspberryPi}
+                mensaje={mensaje}
+              />
+            )} />
+            <Route path="/esqueleto" component={Esqueleto} />
+          </Switch>
+        </main>
       </div>
       <footer style={{ backgroundColor: estadoConexion.color }}>{estadoConexion.texto}</footer>
     </div>

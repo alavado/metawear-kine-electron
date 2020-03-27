@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/react-hooks'
 import mutacionAgregarPaciente from '../../graphql/mutations/agregarPaciente'
 import query from '../../graphql/queries/pacientes'
 import './FormularioNuevoPaciente.css'
-import { Redirect, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const FormularioNuevoPaciente = () => {
 
