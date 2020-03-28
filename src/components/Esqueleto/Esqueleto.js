@@ -109,17 +109,19 @@ const Character = props => {
     // cached scene. Next time the component runs these two objects will be gone.
     // Since the gltf object is a permenently cached object, we can extend it here
     // and extend it with all the data we may need.
-    console.log({gltf})
     if (!gltf.bones) {
       gltf.bones = gltf.scene.children[0].children[0]
     }
     if (!gltf.skeleton) {
-      gltf.skeleton = gltf.scene.children[0].children[0].skeleton
+      gltf.skeleton = gltf.scene.children[0].children[1].skeleton
     }
     gltf.scene.traverse(o => {
       // Reference the neck and waist bones
       if (!o.isBone) {
         return
+      }
+      if (o.name === "mixamorigNeck") {
+        setNeck(o)
       }
       else if (o.name === "mixamorigRightShoulder") {
         setWaist(o)
@@ -138,15 +140,15 @@ const Character = props => {
   }, [gltf])
 
   const texture = useLoader(TextureLoader, "/stacy.jpg")
-  const [mixer] = useState(() => new THREE.AnimationMixer())
+  //const [mixer] = useState(() => new THREE.AnimationMixer())
 
   useFrame((state, delta) => {
-    mixer.update(delta)
+    //mixer.update(delta)
     const { dispositivos, dispatch } = props
     shoulder && moveJoint(dispositivos[2].q, shoulder, dispatch)
     arm && moveJoint(dispositivos[1].q, arm, dispatch, [dispositivos[2].q])
     hand && moveJoint(dispositivos[0].q, hand, dispatch, [dispositivos[1].q, dispositivos[2].q])
-    // waist && moveJoint(props.dispositivos[0].q, waist, props.dispatch)
+    //waist && moveJoint(props.dispositivos[0].q, waist, props.dispatch)
   })
 
   return (
@@ -207,9 +209,9 @@ const App = () => {
   const { segmentos } = useSelector(state => state.segmentos)
 
   // hay que orientar el cuerpo basados en el pecho
-  if (_.isEmpty(dispositivos)) {
-    return null
-  }
+  // if (_.isEmpty(dispositivos)) {
+  //   return null
+  // }
   
   return (
     <div className="contenedor-esqueleto">

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './FormularioNuevaPrueba.css'
 import { canales } from '../../config/canales'
 import agregarPruebaMutation from '../../graphql/mutations/agregarPrueba'
+import query from '../../graphql/queries/pruebas'
 import { useMutation } from '@apollo/react-hooks'
 import { useHistory } from 'react-router-dom'
 
@@ -11,13 +12,15 @@ const FormularioNuevaPrueba = () => {
     nombre: '',
     canales: []
   })
-  const [agregarPrueba] = useMutation(agregarPruebaMutation)
+  const [agregarPrueba] = useMutation(agregarPruebaMutation, {
+    refetchQueries: [{ query }]
+  })
   const history = useHistory()
 
   const enviarFormulario = e => {
     e.preventDefault()
     agregarPrueba({ variables })
-      .then(() => history.push('/seleccion_prueba'))
+      .then(() => history.push('/medicion/seleccion_prueba'))
   }
 
   const toggleCanal = e => {
