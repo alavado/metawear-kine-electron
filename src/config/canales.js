@@ -1,9 +1,17 @@
+export const CANAL_FLEXIÓN_MUÑECA = 'CANAL_FLEXIÓN_MUÑECA'
+export const CANAL_RADIALIZACIÓN_MUÑECA = 'CANAL_RADIALIZACIÓN_MUÑECA'
+export const CANAL_FLEXIÓN_CODO = 'CANAL_FLEXIÓN_CODO'
+export const CANAL_PRONACIÓN_CODO = 'CANAL_PRONACIÓN_CODO'
+export const CANAL_ROTACIÓN_HOMBRO = 'CANAL_ROTACIÓN_HOMBRO'
+export const CANAL_ABDUCCIÓN_HOMBRO = 'CANAL_ABDUCCIÓN_HOMBRO'
+export const CANAL_FLEXIÓN_HOMBRO = 'CANAL_FLEXIÓN_HOMBRO'
+
 export const canales = [
-  'Flexión de muñeca',
-  'Radialización de muñeca',
-  'Flexión de codo',
-  'Pronación de codo',
-  'Rotación de brazo',
-  'Abducción de brazo',
-  'Flexión de hombro'
+  CANAL_FLEXIÓN_MUÑECA,
+  CANAL_RADIALIZACIÓN_MUÑECA,
+  CANAL_FLEXIÓN_CODO,
+  CANAL_PRONACIÓN_CODO,
+  CANAL_ROTACIÓN_HOMBRO,
+  CANAL_ABDUCCIÓN_HOMBRO,
+  CANAL_FLEXIÓN_HOMBRO
 ]
