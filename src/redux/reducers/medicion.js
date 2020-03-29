@@ -1,7 +1,9 @@
-import { FIJAR_PRUEBA } from "../actionTypes"
+import { FIJAR_PRUEBA, COMENZAR_GRABACION, TERMINAR_GRABACION } from "../actionTypes"
 
 const initialState = {
-  prueba: null
+  prueba: null,
+  grabando: false,
+  datos: []
 }
 
 export default function(state = initialState, action) {
@@ -10,6 +12,18 @@ export default function(state = initialState, action) {
       return {
         ...state,
         prueba: action.payload
+      }
+    }
+    case COMENZAR_GRABACION: {
+      return {
+        ...state,
+        grabando: true
+      }
+    }
+    case TERMINAR_GRABACION: {
+      return {
+        ...state,
+        grabando: false
       }
     }
     default:
