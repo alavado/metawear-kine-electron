@@ -58,6 +58,8 @@ function getMouseDegrees(x, y, degreeLimit) {
   return { x: dx, y: dy }
 }
 
+const construirCuaternion = (x, y, z, w) => new Quaternion(y, x, -z, w)
+
 function moveJoint(rot, joint, dispatch, otros = []) {
   const m4 = new Matrix4()
   const { x, y, z, w } = rot
@@ -209,9 +211,9 @@ const App = () => {
   const { segmentos } = useSelector(state => state.segmentos)
 
   // hay que orientar el cuerpo basados en el pecho
-  // if (_.isEmpty(dispositivos)) {
-  //   return null
-  // }
+  if (_.isEmpty(dispositivos)) {
+    return null
+  }
   
   return (
     <div className="contenedor-esqueleto">

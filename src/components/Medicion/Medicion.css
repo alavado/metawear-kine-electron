@@ -1,0 +1,18 @@
+.Medicion {
+  width: 100%;
+  background-color: aqua;
+}
+
+.Medicion__estado {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  width: 100%;
+}
+
+.Medicion__visualizacion {
+  background-color: blue;
+}
+
+.Medicion__graficos {
+  background-color: green;
+}
