@@ -51,7 +51,7 @@ function moveJoint(rot, joint, dispatch, otros = []) {
 const Character = props => {
 
   const group = useRef()
-  const gltf = useLoader(GLTFLoader, "/stacy.glb")
+  const gltf = useLoader(GLTFLoader, '/stacy.glb')
   const [neck, setNeck] = useState(undefined)
   const [waist, setWaist] = useState(undefined)
   const [shoulder, setShoulder] = useState(undefined)
@@ -70,9 +70,9 @@ const Character = props => {
     }
     gltf.scene.traverse(o => {
       // Reference the neck and waist bones
-      if (!o.isBone) {
-        return
-      }
+      // if (!o.isBone) {
+      //   return
+      // }
       if (o.name === "mixamorigNeck") {
         setNeck(o)
       }
@@ -82,10 +82,10 @@ const Character = props => {
       else if (o.name === "mixamorigRightArm") {
         setShoulder(o)
       }
-      if (o.name === "mixamorigRightForeArm") {
+      else if (o.name === "mixamorigRightForeArm") {
         setArm(o)
       }
-      if (o.name === "mixamorigRightHand") {
+      else if (o.name === "mixamorigRightHand") {
         setHand(o)
       }
     })
@@ -95,7 +95,6 @@ const Character = props => {
   const texture = useLoader(TextureLoader, "/stacy.jpg")
 
   useFrame((state, delta) => {
-    console.log(shoulder)
     const { dispositivos, dispatch } = props
     shoulder && moveJoint(dispositivos[2].q, shoulder, dispatch)
     arm && moveJoint(dispositivos[1].q, arm, dispatch, [dispositivos[2].q])
