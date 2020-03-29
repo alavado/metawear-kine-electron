@@ -1,8 +1,8 @@
 const graphql = require('graphql')
 const { GraphQLString, GraphQLInt, GraphQLFloat, GraphQLList, GraphQLInputObjectType } = graphql
 
-const CanalType = new GraphQLInputObjectType({
-  name: 'CanalType',
+const CanalInputType = new GraphQLInputObjectType({
+  name: 'CanalInputType',
   fields: () => ({
     nombre: { type: GraphQLString },
     datos: { type: new GraphQLList(GraphQLFloat) },
@@ -10,4 +10,4 @@ const CanalType = new GraphQLInputObjectType({
   })
 })
 
-module.exports = CanalType
+module.exports = CanalInputType

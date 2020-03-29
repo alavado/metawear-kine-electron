@@ -2,7 +2,8 @@ import { ACTUALIZAR_DISPOSITIVOS, FIJAR_ESTADO_CONEXION,
   ACTUALIZAR_ANGULOS_SEGMENTO, ACTUALIZAR_CUATERNION_SEGMENTO,
   FIJAR_PRUEBA, 
   COMENZAR_GRABACION,
-  TERMINAR_GRABACION} from './actionTypes'
+  TERMINAR_GRABACION,
+  FIJAR_PACIENTE} from './actionTypes'
 import {
   CANAL_FLEXIÓN_MUÑECA, CANAL_RADIALIZACIÓN_MUÑECA,
   CANAL_ABDUCCIÓN_HOMBRO, CANAL_FLEXIÓN_HOMBRO,
@@ -74,4 +75,9 @@ export const comenzarGrabacion = () => ({
 
 export const terminarGrabacion = () => ({
   type: TERMINAR_GRABACION
+})
+
+export const fijarPaciente = paciente => ({
+  type: FIJAR_PACIENTE,
+  payload: paciente
 })

@@ -1,15 +1,21 @@
 import React from 'react'
 import queryPruebas from '../../graphql/queries/pruebas'
 import { useQuery } from '@apollo/react-hooks'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import './SeleccionPrueba.css'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { fijarPrueba } from '../../redux/actions'
 
 const SeleccionPrueba = () => {
 
   const { loading, data } = useQuery(queryPruebas)
+  const { paciente } = useSelector(state => state.paciente)
   const dispatch = useDispatch()
+  const history = useHistory()
+
+  if (!paciente) {
+    history.push('/')
+  }
 
   if (loading) {
     return <p>Cargando...</p>
@@ -17,7 +23,8 @@ const SeleccionPrueba = () => {
 
   return (
     <div>
-      <h1>Seleccione la prueba</h1>
+      <h1>Paciente: {paciente.nombre}</h1>
+      <h2>Seleccione la prueba</h2>
       {data.pruebas.map(prueba => (
         <p key={prueba.id}>
           <Link

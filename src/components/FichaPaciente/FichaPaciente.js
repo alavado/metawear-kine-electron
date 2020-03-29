@@ -3,26 +3,31 @@ import { Link, useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
 import queryPaciente from '../../graphql/queries/paciente'
 import './FichaPaciente.css'
+import { fijarPaciente } from '../../redux/actions'
+import { useDispatch, useSelector } from 'react-redux'
 
 const FichaPaciente = () => {
 
   const { id } = useParams()
-  const { loading, data } = useQuery(queryPaciente, { variables: { id } })
+  const dispatch = useDispatch()
+  const { loading, data } = useQuery(queryPaciente, {
+    variables: { id },
+    onCompleted: data => dispatch(fijarPaciente(data.paciente))
+  })
+  const { paciente } = useSelector(state => state.paciente)
 
-  if (loading) {
+  if (loading || !paciente) {
     return <div>Cargando...</div>
   }
-
-  const { nombre, fechaNacimiento, bp, sexo, diagnostico } = data.paciente
 
   return (
     <div className="FichaPaciente">
       <div>
-        <div>{nombre}</div>
-        <div>{bp}</div>
-        <div>{sexo}</div>
-        <div>{fechaNacimiento}</div>
-        <div>{diagnostico}</div>
+        <div>Paciente: {paciente.nombre}</div>
+        <div>{paciente.bp}</div>
+        <div>{paciente.sexo}</div>
+        <div>{paciente.fechaNacimiento}</div>
+        <div>{paciente.diagnostico}</div>
         <Link to="/medicion/seleccion_prueba">Nueva medición</Link>
         <div>
           <h1>Historial</h1>

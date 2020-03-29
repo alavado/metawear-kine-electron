@@ -4,17 +4,40 @@ import { useSelector, useDispatch } from 'react-redux'
 import VisualizacionMedicion from './VisualizacionMedicion'
 import GraficoCanalMedicion from './GraficoCanalMedicion'
 import { comenzarGrabacion, terminarGrabacion } from '../../redux/actions'
+import { useMutation } from '@apollo/react-hooks'
+import mutacionAgregarMedicion from '../../graphql/mutations/agregarMedicion'
+import { useHistory } from 'react-router-dom'
 
 const Medicion = () => {
 
-  const { grabando, prueba } = useSelector(state => state.medicion)
+  const { grabando, prueba, canales } = useSelector(state => state.medicion)
+  const [agregarMedicion] = useMutation(mutacionAgregarMedicion)
   const dispatch = useDispatch()
+  const history = useHistory()
+  const { paciente } = useSelector(state => state.paciente)
+
+  if (!paciente) {
+    history.push('/')
+  }
+
+  const grabarMedicion = () => {
+    dispatch(terminarGrabacion())
+    agregarMedicion({ variables: {
+      nombre: 'x',
+      prueba: prueba.id,
+      paciente: paciente.id,
+      fecha: Date.now().toString(),
+      canales
+    }})
+      .then(() => history.push(`/paciente/${paciente.id}`))
+  }
 
   return (
     <div className="Medicion">
+      <h1>Paciente: {paciente.nombre}</h1>
       <div className="Medicion__configuracion">
         <h2>{prueba && prueba.nombre}</h2>
-        <button onClick={() => dispatch(!grabando ? comenzarGrabacion() : terminarGrabacion())}>
+        <button onClick={() => grabando ? grabarMedicion() : dispatch(comenzarGrabacion())}>
           {grabando ? 'Detener' : 'Comenzar'}
         </button>
       </div>

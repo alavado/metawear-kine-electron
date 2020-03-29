@@ -7,7 +7,7 @@ const PruebaType = require('./types/prueba_type')
 const Prueba = mongoose.model('Prueba')
 const MedicionType = require('./types/medicion_type')
 const Medicion = mongoose.model('Medicion')
-const CanalType = require('./types/canal_type')
+const CanalInputType = require('./types/canal_input_type')
 
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
@@ -42,7 +42,7 @@ const mutation = new GraphQLObjectType({
         fecha: { type: GraphQLString },
         paciente: { type: GraphQLID },
         prueba: { type: GraphQLID },
-        canales: { type: new GraphQLList(CanalType) }
+        canales: { type: new GraphQLList(CanalInputType) }
       },
       resolve(parentValue, args) {
         return (new Medicion(args)).save()

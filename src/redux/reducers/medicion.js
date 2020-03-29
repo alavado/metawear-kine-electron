@@ -8,6 +8,7 @@ import { rad2deg } from "../../helpers/cuaterniones"
 const initialState = {
   prueba: null,
   grabando: false,
+  inicio: 0,
   canales: []
 }
 
@@ -43,7 +44,6 @@ export default function(state = initialState, action) {
       }
     }
     case COMENZAR_GRABACION: {
-      console.log('comenzar')
       console.log(canales.map(canal => ({
         nombre: canal,
         datos: [],
@@ -52,6 +52,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         grabando: true,
+        inicio: Date.now(),
         canales: canales.map(canal => ({
           nombre: canal,
           datos: [],
@@ -74,7 +75,7 @@ export default function(state = initialState, action) {
       const canalesSegmento = obtenerCanalesSegmento(nombre, angulos)
       canalesSegmento.forEach(({ canal, angulo }) => {
         canales.find(c => c.nombre === canal).datos.push(rad2deg(angulo.valor))
-        canales.find(c => c.nombre === canal).tiempos.push(Date.now())
+        canales.find(c => c.nombre === canal).tiempos.push(Date.now() - state.inicio)
       })
       return { ...state, canales }
     }
