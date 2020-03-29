@@ -17,4 +17,7 @@
 
 .Medicion__graficos {
   flex: 2;
+  max-height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

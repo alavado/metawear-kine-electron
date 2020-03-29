@@ -11,7 +11,7 @@ import { actualizarAngulosSegmento, actualizarCuaternionSegmento } from '../../.
 import { rad2deg } from '../../../helpers/cuaterniones'
 import './VisualizacionMedicion.css'
 
-function moveJoint(rot, joint, dispatch, otros = [], grabar = false) {
+function moveJoint(rot, joint, dispatch, otros = []) {
   const m4 = new Matrix4()
   const { x, y, z, w } = rot
   let cuaternionSegmento = new Quaternion(y, x, -z, w)
