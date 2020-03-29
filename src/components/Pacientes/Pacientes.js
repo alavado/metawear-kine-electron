@@ -13,7 +13,7 @@ const Pacientes = () => {
       <h1>Pacientes</h1>
       <div>
         {data && data.pacientes.map(({ id, nombre }) => (
-          <div className="Pacientes__fila_paciente">
+          <div key={id} className="Pacientes__fila_paciente">
             <Link to={`/paciente/${id}`}>{nombre}</Link>
           </div>
         ))}

@@ -5,6 +5,7 @@ export default gql`
     pruebas {
       id
       nombre
+      canales
     }
   }
 `

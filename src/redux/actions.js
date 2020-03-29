@@ -1,4 +1,6 @@
-import { ACTUALIZAR_DISPOSITIVOS, FIJAR_ESTADO_CONEXION, ACTUALIZAR_ANGULOS_SEGMENTO, ACTUALIZAR_CUATERNION_SEGMENTO } from "./actionTypes";
+import { ACTUALIZAR_DISPOSITIVOS, FIJAR_ESTADO_CONEXION,
+  ACTUALIZAR_ANGULOS_SEGMENTO, ACTUALIZAR_CUATERNION_SEGMENTO,
+  FIJAR_PRUEBA } from "./actionTypes";
 
 export const fijarEstadoConexion = estado => ({
   type: FIJAR_ESTADO_CONEXION,
@@ -54,3 +56,8 @@ export const actualizarCuaternionSegmento = (nombre, cuaternion) => {
     payload: { nombre, cuaternion }
   }
 }
+
+export const fijarPrueba = prueba => ({
+  type: FIJAR_PRUEBA,
+  payload: prueba
+})
