@@ -1,6 +1,6 @@
 import React from 'react'
 import './Medicion.css'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import VisualizacionMedicion from './VisualizacionMedicion'
 import GraficoCanalMedicion from './GraficoCanalMedicion'
 import { comenzarGrabacion, terminarGrabacion } from '../../redux/actions'
@@ -8,6 +8,7 @@ import { comenzarGrabacion, terminarGrabacion } from '../../redux/actions'
 const Medicion = () => {
 
   const { grabando, prueba } = useSelector(state => state.medicion)
+  const dispatch = useDispatch()
 
   return (
     <div className="Medicion">
@@ -15,9 +16,7 @@ const Medicion = () => {
         <h2>{prueba && prueba.nombre}</h2>
         <h3>En esta prueba se mide lo siguiente:</h3>
         {prueba && prueba.canales.map(canal => <div key={canal}>{canal}</div>)}
-        <button
-          onClick={() => grabando ? comenzarGrabacion() : terminarGrabacion()}
-        >
+        <button onClick={() => dispatch(!grabando ? comenzarGrabacion() : terminarGrabacion())}>
           {grabando ? 'Detener' : 'Comenzar'}
         </button>
       </div>

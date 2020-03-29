@@ -3,6 +3,7 @@ import { canales,
   CANAL_FLEXIÓN_MUÑECA, CANAL_RADIALIZACIÓN_MUÑECA,
   CANAL_PRONACIÓN_CODO, CANAL_FLEXIÓN_CODO,
   CANAL_FLEXIÓN_HOMBRO, CANAL_ABDUCCIÓN_HOMBRO, CANAL_ROTACIÓN_HOMBRO } from "../../config/canales"
+import { rad2deg } from "../../helpers/cuaterniones"
 
 const initialState = {
   prueba: null,
@@ -15,7 +16,7 @@ const obtenerCanalesSegmento = (nombre, angulos) => {
     case 'mano derecha':
       return [
         { canal: CANAL_FLEXIÓN_MUÑECA, angulo: angulos[0] },
-        { canal: CANAL_FLEXIÓN_MUÑECA, angulo: angulos[2] },
+        { canal: CANAL_RADIALIZACIÓN_MUÑECA, angulo: angulos[2] },
       ]
     case 'antebrazo derecho':
       return [
@@ -42,15 +43,20 @@ export default function(state = initialState, action) {
       }
     }
     case COMENZAR_GRABACION: {
+      console.log('comenzar')
+      console.log(canales.map(canal => ({
+        nombre: canal,
+        datos: [],
+        tiempos: []
+      })))
       return {
         ...state,
         grabando: true,
-        canales: [
-          canales.map(canal => ({
-            nombre: canal,
-            datos: []
-          }))
-        ]
+        canales: canales.map(canal => ({
+          nombre: canal,
+          datos: [],
+          tiempos: []
+        }))
       }
     }
     case TERMINAR_GRABACION: {
@@ -64,10 +70,11 @@ export default function(state = initialState, action) {
         return state
       }
       const { nombre, angulos } = action.payload
+      const canales = [...state.canales]
       const canalesSegmento = obtenerCanalesSegmento(nombre, angulos)
-      const canales = { ...state.canales }
       canalesSegmento.forEach(({ canal, angulo }) => {
-        canales.find(c => c.nombre === canal).datos.push({ angulo, ts: Date.now() })
+        canales.find(c => c.nombre === canal).datos.push(rad2deg(angulo.valor))
+        canales.find(c => c.nombre === canal).tiempos.push(Date.now())
       })
       return { ...state, canales }
     }
