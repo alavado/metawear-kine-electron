@@ -4,7 +4,9 @@ const { GraphQLObjectType, GraphQLList, GraphQLNonNull, GraphQLID } = graphql
 const PacienteType = require('./paciente_type')
 const Paciente = mongoose.model('Paciente')
 const PruebaType = require('./prueba_type')
-const Pruebas = mongoose.model('Prueba')
+const Prueba = mongoose.model('Prueba')
+const MedicionType = require('./medicion_type')
+const Medicion = mongoose.model('Medicion')
 
 const RootQueryType = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -25,7 +27,19 @@ const RootQueryType = new GraphQLObjectType({
     pruebas: {
       type: new GraphQLList(PruebaType),
       resolve() {
-        return Pruebas.find({})
+        return Prueba.find({})
+      }
+    },
+    mediciones: {
+      type: new GraphQLList(MedicionType),
+      resolve(parentValue, { idPaciente }) {
+        return Medicion.find({ paciente: idPaciente })
+      }
+    },
+    medicion: {
+      type: MedicionType,
+      resolve(parentValue, { id }) {
+        return Medicion.findById(id)
       }
     }
   }

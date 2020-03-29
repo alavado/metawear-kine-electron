@@ -14,8 +14,6 @@ const Medicion = () => {
     <div className="Medicion">
       <div className="Medicion__configuracion">
         <h2>{prueba && prueba.nombre}</h2>
-        <h3>En esta prueba se mide lo siguiente:</h3>
-        {prueba && prueba.canales.map(canal => <div key={canal}>{canal}</div>)}
         <button onClick={() => dispatch(!grabando ? comenzarGrabacion() : terminarGrabacion())}>
           {grabando ? 'Detener' : 'Comenzar'}
         </button>
