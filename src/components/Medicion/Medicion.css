@@ -1,18 +1,20 @@
 .Medicion {
-  width: 100%;
-  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .Medicion__estado {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
 }
 
 .Medicion__visualizacion {
-  background-color: blue;
+  flex: 1;
+  display: flex;
 }
 
 .Medicion__graficos {
-  background-color: green;
+  flex: 2;
 }

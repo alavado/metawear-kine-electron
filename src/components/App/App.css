@@ -41,14 +41,14 @@ nav {
   box-shadow: 2px 0 4px rgba(0, 0, 0, .15);
   height: calc(100vh - 20px);
   background-color: #3E5D58;
-  padding-top: 48px;
+  padding-top: 32px;
   min-width: 220px;
 }
 
 nav h1 {
   color: white;
   margin-left: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   font-size: 1.3em;
 }
 
@@ -124,5 +124,5 @@ canvas:focus, a:focus {
 
 .App__principal {
   width: 100%;
-  /* padding: 32px; */
+  padding: 32px;
 }

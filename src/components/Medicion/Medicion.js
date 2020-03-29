@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './Medicion.css'
 import { useSelector } from 'react-redux'
+import VisualizacionMedicion from './VisualizacionMedicion'
 
 const Medicion = () => {
 
@@ -17,14 +18,15 @@ const Medicion = () => {
       </div>
       {grabando &&
         <div className="Medicion__estado">
-          <div className="Medicion__visualizacion">
-          </div>
           <div className="Medicion__graficos">
             {prueba && prueba.canales.map(canal => (
               <div key={canal}>
                 <h1>{canal}</h1>
               </div>
             ))}
+          </div>
+          <div className="Medicion__visualizacion">
+            <VisualizacionMedicion />
           </div>
         </div>
       }

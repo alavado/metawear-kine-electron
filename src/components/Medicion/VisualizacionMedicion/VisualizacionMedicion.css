@@ -1,0 +1,12 @@
+.VisualizacionMedicion {
+  background-color: #CECECE;
+  flex: 1;
+  height: 100%;
+  border-radius: 32px;
+}
+
+.VisualizacionMedicion__canvas_modelo {
+  width: 200px;
+  height: 200px;
+  border-radius: 32px;
+}

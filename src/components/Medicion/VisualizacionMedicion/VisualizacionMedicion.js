@@ -6,16 +6,10 @@ import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { TextureLoader } from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
-import './Esqueleto.css'
 import _ from 'lodash'
-import { actualizarAngulosSegmento, actualizarCuaternionSegmento } from '../../redux/actions'
-import { rad2deg } from '../../helpers/cuaterniones'
-
-function getMousePos(e) {
-  return { x: e.clientX, y: e.clientY }
-}
-
-const construirCuaternion = (x, y, z, w) => new Quaternion(y, x, -z, w)
+import { actualizarAngulosSegmento, actualizarCuaternionSegmento } from '../../../redux/actions'
+import { rad2deg } from '../../../helpers/cuaterniones'
+import './VisualizacionMedicion.css'
 
 function moveJoint(rot, joint, dispatch, otros = []) {
   const m4 = new Matrix4()
@@ -99,10 +93,9 @@ const Character = props => {
   }, [gltf])
 
   const texture = useLoader(TextureLoader, "/stacy.jpg")
-  //const [mixer] = useState(() => new THREE.AnimationMixer())
 
   useFrame((state, delta) => {
-    //mixer.update(delta)
+    console.log(shoulder)
     const { dispositivos, dispatch } = props
     shoulder && moveJoint(dispositivos[2].q, shoulder, dispatch)
     arm && moveJoint(dispositivos[1].q, arm, dispatch, [dispositivos[2].q])
@@ -160,12 +153,10 @@ const Plane = ({ ...props }) => {
   )
 }
 
-const App = () => {
+const VisualizacionMedicion = () => {
   const d = 8.25
-  const [mousePosition, setMousePosition] = useState({})
   const dispatch = useDispatch()
   const { dispositivos } = useSelector(state => state.dispositivos)
-  const { segmentos } = useSelector(state => state.segmentos)
 
   // hay que orientar el cuerpo basados en el pecho
   if (_.isEmpty(dispositivos)) {
@@ -173,66 +164,50 @@ const App = () => {
   }
   
   return (
-    <div className="contenedor-esqueleto">
-      <div className="visualizacion">
-        <div className="bg" />
-        <Canvas
-          onMouseMove={e => setMousePosition(getMousePos(e))}
-          shadowMap
-          pixelRatio={window.devicePixelRatio}
-          camera={{ position: [0, 0, 15] }}
-          gl2
-          id="canvas-esqueleto"
-        >
-          <hemisphereLight
-            skyColor={"black"}
-            groundColor={0xffffff}
-            intensity={0.68}
-            position={[0, 50, 0]}
+    <div className="VisualizacionMedicion">
+      <div className="bg" />
+      <Canvas
+        shadowMap
+        pixelRatio={window.devicePixelRatio}
+        camera={{ position: [0, 0, 15] }}
+        gl2
+        className="VisualizacionMedicion__canvas_modelo"
+      >
+        <hemisphereLight
+          skyColor={"black"}
+          groundColor={0xffffff}
+          intensity={0.68}
+          position={[0, 50, 0]}
+        />
+        <directionalLight
+          position={[-8, 12, 8]}
+          shadowCameraLeft={d * -1}
+          shadowCameraBottom={d * -1}
+          shadowCameraRight={d}
+          shadowCameraTop={d}
+          shadowCameraNear={0.1}
+          shadowCameraFar={1500}
+          castShadow
+        />
+        <Plane rotation={[-0.5 * Math.PI, 0, 0]} position={[0, -11, 0]} />
+        <Suspense fallback={null}>
+          <Character
+            position={[0, -7, 0]}
+            scale={[7, 7, 7]}
+            dispositivos={dispositivos}
+            dispatch={dispatch}
           />
-          <directionalLight
-            position={[-8, 12, 8]}
-            shadowCameraLeft={d * -1}
-            shadowCameraBottom={d * -1}
-            shadowCameraRight={d}
-            shadowCameraTop={d}
-            shadowCameraNear={0.1}
-            shadowCameraFar={1500}
-            castShadow
-          />
-          <Plane rotation={[-0.5 * Math.PI, 0, 0]} position={[0, -11, 0]} />
-          <Suspense fallback={null}>
-            <Character
-              mousePosition={mousePosition}
-              position={[0, -7, 0]}
-              scale={[7, 7, 7]}
-              dispositivos={dispositivos}
-              dispatch={dispatch}
-            />
-          </Suspense>
-          <Controls
-            dampingFactor={0.5}
-            rotateSpeed={1}
-            maxPolarAngle={Math.PI / 2}
-            minPolarAngle={Math.PI / 2}
-          />
-        </Canvas>
-        <div className="layer" />
-      </div>
-      <div className="barra-derecha">
-        {segmentos.map(({nombre, angulos}) => (
-          <div className="angulos-segmento">
-            <h3>{nombre}</h3>
-            <ul>
-              {angulos.filter(a => a.nombre !== '').map(a => (
-                <li key={a.nombre}><h4>{a.nombre}</h4><p>{rad2deg(a.valor)} °</p></li>)
-              )}
-            </ul>
-          </div>
-        ))}
-      </div>
+        </Suspense>
+        <Controls
+          dampingFactor={0.5}
+          rotateSpeed={1}
+          maxPolarAngle={Math.PI / 2}
+          minPolarAngle={Math.PI / 2}
+        />
+      </Canvas>
+      <div className="layer" />
     </div>
   )
 }
 
-export default App
+export default VisualizacionMedicion
