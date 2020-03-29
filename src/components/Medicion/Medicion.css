@@ -16,8 +16,11 @@
 }
 
 .Medicion__graficos {
+  display: flex;
+  flex-direction: column;
   flex: 2;
   max-height: 70vh;
   overflow-y: auto;
   overflow-x: hidden;
+  margin-right: 32px;
 }
