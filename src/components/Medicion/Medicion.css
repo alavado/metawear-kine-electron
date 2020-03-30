@@ -4,6 +4,20 @@
   height: 100%;
 }
 
+.Medicion__titulo {
+  font-size: 1.3em;
+  margin-bottom: 8px;
+}
+
+.Medicion__configuracion {
+  margin-bottom: 16px;
+  display: grid;
+  grid-template-columns: auto auto;
+  max-width: 50vh;
+  justify-items: left;
+  align-items: baseline;
+}
+
 .Medicion__estado {
   display: flex;
   flex-direction: row;
@@ -23,4 +37,28 @@
   overflow-y: auto;
   overflow-x: hidden;
   margin-right: 32px;
+}
+
+.Medicion__boton_comenzar {
+  display: flex;
+}
+
+.Medicion__boton_comenzar--grabando::after {
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  margin-left: 4px;
+  background-color: red;
+  display: block;
+  content: ' ';
+  animation: grabando .5s ease-in-out alternate infinite both;
+}
+
+@keyframes grabando {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

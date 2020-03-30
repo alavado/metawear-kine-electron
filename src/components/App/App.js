@@ -52,9 +52,9 @@ const App = () => {
       <div className="contenedor-principal">
         <nav>
           <h1>ACHS Kine</h1>
-          <Link to="/pacientes" activeClassName="link-activo">Pacientes</Link>
           <Link to="/dispositivos" activeClassName="link-activo">Conexión</Link>
-          <Link to="/esqueleto" activeClassName="link-activo">Visualización 3D</Link>
+          <Link to="/pacientes" activeClassName="link-activo">Pacientes</Link>
+          {/* <Link to="/esqueleto" activeClassName="link-activo">Visualización 3D</Link> */}
         </nav>
         <main className="App__principal">
           <Switch>

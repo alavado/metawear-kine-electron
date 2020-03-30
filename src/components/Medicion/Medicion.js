@@ -16,10 +16,10 @@ const Medicion = () => {
   const history = useHistory()
   const { paciente } = useSelector(state => state.paciente)
   const [agregarMedicion] = useMutation(mutacionAgregarMedicion, {
-    refetchQueries: [{ query, variables: { id: paciente.id } }]
+    // refetchQueries: [{ query, variables: { id: paciente.id } }]
   })
 
-  if (!paciente) {
+  if (!paciente || !prueba) {
     history.push('/')
   }
 
@@ -37,11 +37,14 @@ const Medicion = () => {
 
   return (
     <div className="Medicion">
-      <h1>Paciente: {paciente.nombre}</h1>
+      <h1 className="Medicion__titulo">Paciente: {paciente.nombre}</h1>
       <div className="Medicion__configuracion">
         <h2>{prueba && prueba.nombre}</h2>
-        <button onClick={() => grabando ? grabarMedicion() : dispatch(comenzarGrabacion())}>
-          {grabando ? 'Detener' : 'Comenzar'}
+        <button
+          className={`Medicion__boton_comenzar ${grabando && 'Medicion__boton_comenzar--grabando'}`}
+          onClick={() => grabando ? grabarMedicion() : dispatch(comenzarGrabacion())}
+        >
+          {grabando ? 'Terminar' : 'Comenzar'}
         </button>
       </div>
       <div className="Medicion__estado">

@@ -1,0 +1,9 @@
+.FormularioNuevaPrueba__titulo {
+  font-size: 1.3em;
+  margin-bottom: 16px;
+}
+
+.FormularioNuevaPrueba__checkbox {
+  display: flex;
+  align-items: center;
+}

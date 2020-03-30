@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './FormularioNuevaPrueba.css'
-import { canales } from '../../config/canales'
+import { canales, formatearCanal } from '../../config/canales'
 import agregarPruebaMutation from '../../graphql/mutations/agregarPrueba'
 import query from '../../graphql/queries/pruebas'
 import { useMutation } from '@apollo/react-hooks'
@@ -33,8 +33,8 @@ const FormularioNuevaPrueba = () => {
   }
 
   return (
-    <div>
-      <h1>Nueva prueba</h1>
+    <div className="FormularioNuevaPrueba">
+      <h1 className="FormularioNuevaPrueba__titulo">Nueva prueba</h1>
       <form onSubmit={enviarFormulario}>
         <label>Nombre de la prueba</label>
         <input
@@ -43,13 +43,13 @@ const FormularioNuevaPrueba = () => {
           onChange={e => setVariables({ ...variables, nombre: e.target.value })}
         />
         {canales.map(canal => (
-          <div key={`contenedor-canal-${canal}`}>
+          <div className="FormularioNuevaPrueba__checkbox" key={`contenedor-canal-${canal}`}>
             <input
               type="checkbox"
               value={canal}
               onChange={toggleCanal}
             />
-            <label>{canal}</label>
+            <label>{formatearCanal(canal)}</label>
           </div>
         ))}
         <input type="submit" value="Agregar" />

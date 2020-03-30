@@ -22,20 +22,22 @@ const SeleccionPrueba = () => {
   }
 
   return (
-    <div>
-      <h1>Paciente: {paciente.nombre}</h1>
-      <h2>Seleccione la prueba</h2>
-      {data.pruebas.map(prueba => (
-        <p key={prueba.id}>
+    <div className="SeleccionPrueba">
+      <h1 className="SeleccionPrueba__titulo">Paciente: {paciente.nombre}</h1>
+      <h2 className="SeleccionPrueba__instrucciones">Seleccione la prueba</h2>
+      <div className="SeleccionPrueba__contenedor_pruebas">
+        {data.pruebas.map(prueba => (
           <Link
+            className="SeleccionPrueba__boton_prueba"
+            key={prueba.id}
             onClick={() => dispatch(fijarPrueba(prueba))}
             to={`/medicion/${prueba.id}`}
           >
             {prueba.nombre}
           </Link>
-        </p>
-      ))}
-      <p><Link to="/nueva_prueba">Nueva</Link></p>
+        ))}
+        <Link className="SeleccionPrueba__boton_nueva_prueba" to="/nueva_prueba">Nueva</Link>
+      </div>
     </div>
   )
 }

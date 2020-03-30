@@ -1,0 +1,32 @@
+.SeleccionPrueba__titulo {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.SeleccionPrueba__instrucciones {
+  margin: 16px 0;
+}
+
+.SeleccionPrueba__contenedor_pruebas {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  gap: 24px;
+}
+
+.SeleccionPrueba__boton_prueba {
+  background-color: #03A9F4;
+  color: white;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.SeleccionPrueba__boton_nueva_prueba {
+  background-color: #F44336;
+  color: white;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 8px;
+}

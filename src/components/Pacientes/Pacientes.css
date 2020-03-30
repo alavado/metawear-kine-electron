@@ -1,6 +1,7 @@
 .Pacientes {
   display: flex;
   flex-direction: column;
+  max-width: 60vh;
 }
 
 .Pacientes__superior {
