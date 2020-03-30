@@ -31,38 +31,49 @@ const FormularioNuevoPaciente = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={registrar}>
-        <label>Nombre</label>
-        <input
-          type="text"
-          value={variables.nombre}
-          onChange={e => cambiarVariable('nombre', e.target.value)}
-        />
-        <label>BP</label>
-        <input
-          type="text"
-          value={variables.bp}
-          onChange={e => cambiarVariable('bp', e.target.value)}
-        />
-        <label>Sexo</label>
-        <input
-          type="text"
-          value={variables.sexo}
-          onChange={e => cambiarVariable('sexo', e.target.value)}
-        />
-        <label>Fecha de nacimiento</label>
-        <input
-          type="date"
-          value={variables.fechaNacimiento}
-          onChange={e => cambiarVariable('fechaNacimiento', e.target.value)}
-        />
-        <label>Diagnóstico</label>
-        <input
-          type="text"
-          value={variables.diagnostico}
-          onChange={e => cambiarVariable('diagnostico', e.target.value)}
-        />
+    <div className="FormularioNuevoPaciente">
+      <h1>Nuevo paciente</h1>
+      <form className="FormularioNuevoPaciente__formulario" onSubmit={registrar}>
+        <div>
+          <label>Nombre</label>
+          <input
+            type="text"
+            value={variables.nombre}
+            onChange={e => cambiarVariable('nombre', e.target.value)}
+          />
+        </div>
+        <div>
+          <label>BP</label>
+          <input
+            type="text"
+            value={variables.bp}
+            onChange={e => cambiarVariable('bp', e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Sexo</label>
+          <input
+            type="text"
+            value={variables.sexo}
+            onChange={e => cambiarVariable('sexo', e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Fecha de nacimiento</label>
+          <input
+            type="date"
+            value={variables.fechaNacimiento}
+            onChange={e => cambiarVariable('fechaNacimiento', e.target.value)}
+          />
+        </div>
+        <div>
+          <label>Diagnóstico</label>
+          <input
+            type="text"
+            value={variables.diagnostico}
+            onChange={e => cambiarVariable('diagnostico', e.target.value)}
+          />
+        </div>
         <input type="submit" value="Registrar" />
       </form>
     </div>

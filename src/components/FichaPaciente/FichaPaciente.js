@@ -24,13 +24,29 @@ const FichaPaciente = () => {
     <div className="FichaPaciente">
       <div>
         <div>Paciente: {paciente.nombre}</div>
-        <div>{paciente.bp}</div>
-        <div>{paciente.sexo}</div>
-        <div>{paciente.fechaNacimiento}</div>
-        <div>{paciente.diagnostico}</div>
+        <div>BP: {paciente.bp}</div>
+        <div>Sexo: {paciente.sexo}</div>
+        <div>Fecha de nacimiento: {paciente.fechaNacimiento}</div>
+        <div>Diagnóstico: {paciente.diagnostico}</div>
         <Link to="/medicion/seleccion_prueba">Nueva medición</Link>
-        <div>
+        <div className="FichaPaciente__historial">
           <h1>Historial</h1>
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Prueba</th>
+              </tr>
+            </thead>
+            <tbody>
+              {paciente.mediciones.map(medicion => (
+                <tr key={medicion.id}>
+                  <td>{medicion.fecha}</td>
+                  <td>{medicion.prueba.nombre}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

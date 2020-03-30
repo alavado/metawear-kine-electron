@@ -9,6 +9,14 @@ export default gql`
       sexo
       fechaNacimiento
       diagnostico
+      mediciones {
+        id
+        nombre
+        fecha
+        prueba {
+          nombre
+        }
+      }
     }
   }
 `

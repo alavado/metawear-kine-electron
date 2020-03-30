@@ -29,7 +29,7 @@ const pacienteSchema = new Schema({
 })
 
 pacienteSchema.statics.findMediciones = function(id) {
-  return Medicion.find({ paciente: id })
+  return Medicion.find({ paciente: id }).sort([['fecha', -1]])
 }
 
 module.exports = mongoose.model('Paciente', pacienteSchema)
