@@ -10,7 +10,7 @@ const FormularioNuevoPaciente = () => {
   const [variables, setVariables] = useState({
     nombre: '',
     bp: '',
-    sexo: '',
+    sexo: 'M',
     fechaNacimiento: '',
     diagnostico: ''
   })
@@ -32,17 +32,18 @@ const FormularioNuevoPaciente = () => {
 
   return (
     <div className="FormularioNuevoPaciente">
-      <h1>Nuevo paciente</h1>
+      <h1 className="FormularioNuevoPaciente__titulo">Nuevo paciente</h1>
       <form className="FormularioNuevoPaciente__formulario" onSubmit={registrar}>
-        <div>
+        <div className="FormularioNuevoPaciente__campo">
           <label>Nombre</label>
           <input
             type="text"
             value={variables.nombre}
             onChange={e => cambiarVariable('nombre', e.target.value)}
+            autoFocus
           />
         </div>
-        <div>
+        <div className="FormularioNuevoPaciente__campo">
           <label>BP</label>
           <input
             type="text"
@@ -50,15 +51,18 @@ const FormularioNuevoPaciente = () => {
             onChange={e => cambiarVariable('bp', e.target.value)}
           />
         </div>
-        <div>
+        <div className="FormularioNuevoPaciente__campo">
           <label>Sexo</label>
-          <input
-            type="text"
+          <select
+            className="FormularioNuevoPaciente__selector"
             value={variables.sexo}
             onChange={e => cambiarVariable('sexo', e.target.value)}
-          />
+          >
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+          </select>
         </div>
-        <div>
+        <div className="FormularioNuevoPaciente__campo">
           <label>Fecha de nacimiento</label>
           <input
             type="date"
@@ -66,7 +70,7 @@ const FormularioNuevoPaciente = () => {
             onChange={e => cambiarVariable('fechaNacimiento', e.target.value)}
           />
         </div>
-        <div>
+        <div className="FormularioNuevoPaciente__campo">
           <label>Diagnóstico</label>
           <input
             type="text"
@@ -74,7 +78,9 @@ const FormularioNuevoPaciente = () => {
             onChange={e => cambiarVariable('diagnostico', e.target.value)}
           />
         </div>
-        <input type="submit" value="Registrar" />
+        <div className="FormularioNuevoPaciente__campo">
+          <input className="FormularioNuevoPaciente__boton" type="submit" value="Registrar" />
+        </div>
       </form>
     </div>
   )

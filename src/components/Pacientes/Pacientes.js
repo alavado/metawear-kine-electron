@@ -10,15 +10,31 @@ const Pacientes = () => {
 
   return (
     <div className="Pacientes">
-      <h1>Pacientes</h1>
-      <div>
-        {data && data.pacientes.map(({ id, nombre }) => (
-          <div key={id} className="Pacientes__fila_paciente">
-            <Link to={`/paciente/${id}`}>{nombre}</Link>
-          </div>
-        ))}
+      <div className="Pacientes__superior">
+        <h1 className="Pacientes__titulo">Pacientes</h1>
+        <Link
+          className="Pacientes__link_nuevo_paciente"
+          to={'/nuevo_paciente'}
+        >
+          Nuevo paciente
+        </Link>
       </div>
-      <Link to={'/nuevo_paciente'}>Nuevo paciente</Link>
+      <table className="Pacientes__tabla_pacientes">
+        <thead className="Pacientes__tabla_pacientes_encabezado">
+          <tr>
+            <th className="Pacientes__tabla_pacientes_celda">Nombre</th>
+          </tr>
+        </thead>
+        <tbody>
+        {data && data.pacientes.map(({ id, nombre }) => (
+          <tr key={id} className="Pacientes__tabla_pacientes_fila">
+            <td className="Pacientes__tabla_pacientes_celda">
+              <Link to={`/paciente/${id}`}>{nombre}</Link>
+            </td>
+          </tr>
+        ))}
+        </tbody>
+      </table>
     </div>
   )
 }

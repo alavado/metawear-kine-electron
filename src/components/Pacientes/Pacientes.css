@@ -1,0 +1,43 @@
+.Pacientes {
+  display: flex;
+  flex-direction: column;
+}
+
+.Pacientes__superior {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.Pacientes__titulo {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.Pacientes__link_nuevo_paciente {
+  background-color: #D32F2F;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.Pacientes__tabla_pacientes {
+  flex: 1;
+}
+
+.Pacientes__tabla_pacientes_encabezado {
+  border: 1px solid black;
+}
+
+.Pacientes__tabla_pacientes_celda {
+  padding: 4px;
+}
+
+.Pacientes__tabla_pacientes_fila {
+  border: 1px solid black;
+  padding: 4px;
+}

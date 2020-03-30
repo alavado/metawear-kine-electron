@@ -2,13 +2,11 @@ import React, { Suspense, useRef, useMemo, useState } from 'react'
 import { Canvas, useFrame, useLoader, extend, useThree, useRender } from 'react-three-fiber'
 import { Quaternion, Matrix4 } from 'three'
 import { useSelector, useDispatch } from 'react-redux'
-import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import { TextureLoader } from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 import _ from 'lodash'
 import { actualizarAngulosSegmento, actualizarCuaternionSegmento } from '../../../redux/actions'
-import { rad2deg } from '../../../helpers/cuaterniones'
 import './VisualizacionMedicion.css'
 
 function moveJoint(rot, joint, dispatch, otros = []) {
@@ -70,9 +68,9 @@ const Character = props => {
     }
     gltf.scene.traverse(o => {
       // Reference the neck and waist bones
-      // if (!o.isBone) {
-      //   return
-      // }
+      if (!o.isBone) {
+        return
+      }
       if (o.name === "mixamorigNeck") {
         setNeck(o)
       }

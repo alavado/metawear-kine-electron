@@ -5,12 +5,16 @@ import queryPaciente from '../../graphql/queries/paciente'
 import './FichaPaciente.css'
 import { fijarPaciente } from '../../redux/actions'
 import { useDispatch, useSelector } from 'react-redux'
+import moment from 'moment'
+import 'moment/locale/es'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChartArea, faDownload } from '@fortawesome/free-solid-svg-icons'
 
 const FichaPaciente = () => {
 
   const { id } = useParams()
   const dispatch = useDispatch()
-  const { loading, data } = useQuery(queryPaciente, {
+  const { loading } = useQuery(queryPaciente, {
     variables: { id },
     onCompleted: data => dispatch(fijarPaciente(data.paciente))
   })
@@ -22,32 +26,41 @@ const FichaPaciente = () => {
 
   return (
     <div className="FichaPaciente">
-      <div>
-        <div>Paciente: {paciente.nombre}</div>
+      <div className="FichaPaciente__titulo">Paciente: {paciente.nombre}</div>
+      <div className="FichaPaciente__campos">
         <div>BP: {paciente.bp}</div>
         <div>Sexo: {paciente.sexo}</div>
-        <div>Fecha de nacimiento: {paciente.fechaNacimiento}</div>
+        <div>Fecha de nacimiento: {moment.unix(paciente.fechaNacimiento / 1000).format('L')}</div>
         <div>Diagnóstico: {paciente.diagnostico}</div>
-        <Link to="/medicion/seleccion_prueba">Nueva medición</Link>
-        <div className="FichaPaciente__historial">
-          <h1>Historial</h1>
-          <table>
-            <thead>
-              <tr>
-                <th>Fecha</th>
-                <th>Prueba</th>
+      </div>
+      <div className="FichaPaciente__contenedor_link_nueva_medicion">
+        <Link className="FichaPaciente__link_nueva_medicion" to="/medicion/seleccion_prueba">Nueva medición</Link>
+      </div>
+      <div className="FichaPaciente__historial">
+        <h1 className="FichaPaciente__historial_titulo">Historial de mediciones</h1>
+        <table className="FichaPaciente__historial_tabla">
+          <thead>
+            <tr>
+              <th className="FichaPaciente__encabezado">Fecha</th>
+              <th className="FichaPaciente__encabezado">Prueba</th>
+              <th className="FichaPaciente__encabezado">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {paciente.mediciones.map(medicion => (
+              <tr key={medicion.id}>
+                <td className="FichaPaciente__celda">{moment.unix(medicion.fecha / 1000).fromNow()}</td>
+                <td className="FichaPaciente__celda">{medicion.prueba.nombre}</td>
+                <td className="FichaPaciente__celda">
+                  <div className="FichaPaciente__acciones_historial">
+                    <FontAwesomeIcon title="Descargar CSV" className="FichaPaciente__icono_celda" icon={faDownload} />
+                    <FontAwesomeIcon title="Ver" className="FichaPaciente__icono_celda" icon={faChartArea} />
+                  </div>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {paciente.mediciones.map(medicion => (
-                <tr key={medicion.id}>
-                  <td>{medicion.fecha}</td>
-                  <td>{medicion.prueba.nombre}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   )

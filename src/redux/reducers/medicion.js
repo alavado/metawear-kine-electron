@@ -21,8 +21,8 @@ const obtenerCanalesSegmento = (nombre, angulos) => {
       ]
     case 'antebrazo derecho':
       return [
-        { canal: CANAL_FLEXIÓN_CODO, angulo: angulos[0] },
-        { canal: CANAL_PRONACIÓN_CODO, angulo: angulos[2] },
+        { canal: CANAL_FLEXIÓN_CODO, angulo: angulos[2] },
+        { canal: CANAL_PRONACIÓN_CODO, angulo: angulos[0] },
       ]
     case 'brazo derecho':
       return [
@@ -73,6 +73,7 @@ export default function(state = initialState, action) {
       const { nombre, angulos } = action.payload
       const canales = [...state.canales]
       const canalesSegmento = obtenerCanalesSegmento(nombre, angulos)
+      console.log(canalesSegmento)
       canalesSegmento.forEach(({ canal, angulo }) => {
         canales.find(c => c.nombre === canal).datos.push(rad2deg(angulo.valor))
         canales.find(c => c.nombre === canal).tiempos.push(Date.now() - state.inicio)

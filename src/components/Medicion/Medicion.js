@@ -6,15 +6,18 @@ import GraficoCanalMedicion from './GraficoCanalMedicion'
 import { comenzarGrabacion, terminarGrabacion } from '../../redux/actions'
 import { useMutation } from '@apollo/react-hooks'
 import mutacionAgregarMedicion from '../../graphql/mutations/agregarMedicion'
+import query from '../../graphql/queries/paciente'
 import { useHistory } from 'react-router-dom'
 
 const Medicion = () => {
 
   const { grabando, prueba, canales } = useSelector(state => state.medicion)
-  const [agregarMedicion] = useMutation(mutacionAgregarMedicion)
   const dispatch = useDispatch()
   const history = useHistory()
   const { paciente } = useSelector(state => state.paciente)
+  const [agregarMedicion] = useMutation(mutacionAgregarMedicion, {
+    refetchQueries: [{ query, variables: { id: paciente.id } }]
+  })
 
   if (!paciente) {
     history.push('/')
@@ -23,7 +26,7 @@ const Medicion = () => {
   const grabarMedicion = () => {
     dispatch(terminarGrabacion())
     agregarMedicion({ variables: {
-      nombre: 'x',
+      nombre: 'Sin nombre',
       prueba: prueba.id,
       paciente: paciente.id,
       fecha: Date.now().toString(),
