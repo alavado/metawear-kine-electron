@@ -1,0 +1,8 @@
+.MedicionPasada {
+  overflow-y: auto;
+  max-height: 85vh;
+}
+
+.MedicionPasada__contenedor_grafico {
+  margin-top: 24px;
+}
