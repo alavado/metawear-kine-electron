@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { Line } from 'react-chartjs-2'
 import { useSelector } from 'react-redux'
+import { formatearCanal } from '../../../config/canales'
 import _ from 'lodash'
 import './GraficoCanalMedicion.css'
 
@@ -53,7 +54,7 @@ const GraficoCanalMedicion = ({ canal }) => {
 
   return (
     <div className="GraficoCanalMedicion">
-      <h2>{canal}</h2>
+      <h2>{formatearCanal(canal)}</h2>
       <Line data={data} options={options} height={80} />
     </div>
   )

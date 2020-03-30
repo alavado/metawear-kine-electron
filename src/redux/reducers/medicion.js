@@ -53,7 +53,7 @@ export default function(state = initialState, action) {
         ...state,
         grabando: true,
         inicio: Date.now(),
-        canales: canales.map(canal => ({
+        canales: state.prueba.canales.map(canal => ({
           nombre: canal,
           datos: [],
           tiempos: []
@@ -75,8 +75,10 @@ export default function(state = initialState, action) {
       const canalesSegmento = obtenerCanalesSegmento(nombre, angulos)
       console.log(canalesSegmento)
       canalesSegmento.forEach(({ canal, angulo }) => {
-        canales.find(c => c.nombre === canal).datos.push(rad2deg(angulo.valor))
-        canales.find(c => c.nombre === canal).tiempos.push(Date.now() - state.inicio)
+        if (state.prueba.canales.includes(canal)) {
+          canales.find(c => c.nombre === canal).datos.push(rad2deg(angulo.valor))
+          canales.find(c => c.nombre === canal).tiempos.push(Date.now() - state.inicio)
+        }
       })
       return { ...state, canales }
     }
