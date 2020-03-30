@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 import 'moment/locale/es'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChartArea, faDownload } from '@fortawesome/free-solid-svg-icons'
+import { faChartArea, faFileExport } from '@fortawesome/free-solid-svg-icons'
+const { ipcRenderer } = window.require('electron')
 
 const FichaPaciente = () => {
 
@@ -54,15 +55,20 @@ const FichaPaciente = () => {
                 <td className="FichaPaciente__celda">
                   <div className="FichaPaciente__acciones_historial">
                     <FontAwesomeIcon
-                      title="Descargar CSV"
+                      title="Exportar CSV"
                       className="FichaPaciente__icono_celda"
-                      icon={faDownload}
+                      icon={faFileExport}
+                      size="lg"
+                      onClick={() => {
+                        //ipcRenderer.send('generarCSV', generarCSV(medicion))
+                      }}
                     />
                     <Link to={`/medicion_pasada/${medicion.id}`}>
                       <FontAwesomeIcon
                         title="Ver"
                         className="FichaPaciente__icono_celda"
                         icon={faChartArea}
+                        size="lg"
                       />
                     </Link>
                   </div>
