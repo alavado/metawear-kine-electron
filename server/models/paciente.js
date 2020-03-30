@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const Medicion = require('./medicion')
 
 const pacienteSchema = new Schema({
   nombre: {
@@ -20,7 +21,15 @@ const pacienteSchema = new Schema({
   },
   diagnostico: {
     type: String
-  }
+  },
+  mediciones: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Medicion'
+  }]
 })
+
+pacienteSchema.statics.findMediciones = function(id) {
+  return Medicion.find({ paciente: id })
+}
 
 module.exports = mongoose.model('Paciente', pacienteSchema)

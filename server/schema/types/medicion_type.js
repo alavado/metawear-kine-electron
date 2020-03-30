@@ -1,5 +1,6 @@
 const graphql = require('graphql')
 const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLList, GraphQLFloat, GraphQLInt } = graphql
+const CanalType = require('./canal_type')
 
 const MedicionType = new GraphQLObjectType({
   name: 'MedicionType',
@@ -7,7 +8,8 @@ const MedicionType = new GraphQLObjectType({
     id: { type: GraphQLID },
     nombre: { type: GraphQLString },
     paciente: { type: GraphQLID },
-    prueba: { type: GraphQLID }
+    prueba: { type: GraphQLID },
+    canales: { type: new GraphQLList(CanalType) }
   })
 })
 

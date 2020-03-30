@@ -7,11 +7,11 @@ const medicionSchema = new Schema({
     required: true
   },
   prueba: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Prueba'
   },
   paciente: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Paciente'
   },
   canales: [{
