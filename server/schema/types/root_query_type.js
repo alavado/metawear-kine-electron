@@ -38,6 +38,7 @@ const RootQueryType = new GraphQLObjectType({
     },
     medicion: {
       type: MedicionType,
+      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
       resolve(parentValue, { id }) {
         return Medicion.findById(id)
       }

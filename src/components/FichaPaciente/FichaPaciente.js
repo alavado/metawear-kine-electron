@@ -53,8 +53,18 @@ const FichaPaciente = () => {
                 <td className="FichaPaciente__celda">{medicion.prueba.nombre}</td>
                 <td className="FichaPaciente__celda">
                   <div className="FichaPaciente__acciones_historial">
-                    <FontAwesomeIcon title="Descargar CSV" className="FichaPaciente__icono_celda" icon={faDownload} />
-                    <FontAwesomeIcon title="Ver" className="FichaPaciente__icono_celda" icon={faChartArea} />
+                    <FontAwesomeIcon
+                      title="Descargar CSV"
+                      className="FichaPaciente__icono_celda"
+                      icon={faDownload}
+                    />
+                    <Link to={`/medicion_pasada/${medicion.id}`}>
+                      <FontAwesomeIcon
+                        title="Ver"
+                        className="FichaPaciente__icono_celda"
+                        icon={faChartArea}
+                      />
+                    </Link>
                   </div>
                 </td>
               </tr>

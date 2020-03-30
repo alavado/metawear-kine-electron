@@ -12,6 +12,7 @@ import SeleccionPrueba from '../SeleccionPrueba'
 import FormularioNuevoPaciente from '../FormularioNuevoPaciente'
 import FormularioNuevaPrueba from '../FormularioNuevaPrueba'
 import Medicion from '../Medicion'
+import MedicionPasada from '../MedicionPasada'
 
 const App = () => {
 
@@ -70,6 +71,7 @@ const App = () => {
               />
             )} />
             <Route path="/esqueleto" component={Esqueleto} />
+            <Route path="/medicion_pasada/:id" component={MedicionPasada} />
           </Switch>
         </main>
       </div>
