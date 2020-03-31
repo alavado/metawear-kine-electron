@@ -1,0 +1,32 @@
+.HistorialPaciente__titulo {
+  font-size: 1.3em;
+}
+
+.HistorialPaciente__tabla {
+  margin-top: 8px;
+  font-size: .8em;
+}
+
+.HistorialPaciente__celda {
+  padding: 8px;
+  border: 1px solid black;
+}
+
+.HistorialPaciente__encabezado {
+  text-align: left;
+  padding: 8px;
+  color: white;
+  background-color: #388E3C;
+  border: 1px solid black;
+}
+
+.HistorialPaciente__acciones {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: auto;
+  gap: 8px;
+}
+
+.HistorialPaciente__icono_celda {
+  cursor: pointer;
+}

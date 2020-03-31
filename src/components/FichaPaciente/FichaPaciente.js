@@ -7,9 +7,7 @@ import { fijarPaciente } from '../../redux/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 import 'moment/locale/es'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChartArea, faFileExport } from '@fortawesome/free-solid-svg-icons'
-const { ipcRenderer } = window.require('electron')
+import HistorialPaciente from './HistorialPaciente'
 
 const FichaPaciente = () => {
 
@@ -37,47 +35,7 @@ const FichaPaciente = () => {
       <div className="FichaPaciente__contenedor_link_nueva_medicion">
         <Link className="FichaPaciente__link_nueva_medicion" to="/medicion/seleccion_prueba">Nueva medición</Link>
       </div>
-      <div className="FichaPaciente__historial">
-        <h1 className="FichaPaciente__historial_titulo">Historial de mediciones</h1>
-        <table className="FichaPaciente__historial_tabla">
-          <thead>
-            <tr>
-              <th className="FichaPaciente__encabezado">Fecha</th>
-              <th className="FichaPaciente__encabezado">Prueba</th>
-              <th className="FichaPaciente__encabezado">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paciente.mediciones.map(medicion => (
-              <tr key={medicion.id}>
-                <td className="FichaPaciente__celda">{moment.unix(medicion.fecha / 1000).fromNow()}</td>
-                <td className="FichaPaciente__celda">{medicion.prueba.nombre}</td>
-                <td className="FichaPaciente__celda">
-                  <div className="FichaPaciente__acciones_historial">
-                    <FontAwesomeIcon
-                      title="Exportar CSV"
-                      className="FichaPaciente__icono_celda"
-                      icon={faFileExport}
-                      size="lg"
-                      onClick={() => {
-                        //ipcRenderer.send('generarCSV', generarCSV(medicion))
-                      }}
-                    />
-                    <Link to={`/medicion_pasada/${medicion.id}`}>
-                      <FontAwesomeIcon
-                        title="Ver"
-                        className="FichaPaciente__icono_celda"
-                        icon={faChartArea}
-                        size="lg"
-                      />
-                    </Link>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <HistorialPaciente paciente={paciente} />
     </div>
   )
 }

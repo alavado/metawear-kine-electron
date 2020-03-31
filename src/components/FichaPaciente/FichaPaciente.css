@@ -23,36 +23,3 @@
   padding: 4px 16px;
   border-radius: 8px;
 }
-
-.FichaPaciente__historial_titulo {
-  font-size: 1.3em;
-}
-
-.FichaPaciente__historial_tabla {
-  margin-top: 8px;
-  font-size: .8em;
-}
-
-.FichaPaciente__celda {
-  padding: 8px;
-  border: 1px solid black;
-}
-
-.FichaPaciente__encabezado {
-  text-align: left;
-  padding: 8px;
-  color: white;
-  background-color: #388E3C;
-  border: 1px solid black;
-}
-
-.FichaPaciente__acciones_historial {
-  display: grid;
-  justify-items: center;
-  grid-template-columns: auto auto;
-  gap: 8px;
-}
-
-.FichaPaciente__icono_celda {
-  cursor: pointer;
-}

@@ -5,6 +5,7 @@ export default gql`
     pacientes {
       id
       nombre
+      bp
     }
   }
 `

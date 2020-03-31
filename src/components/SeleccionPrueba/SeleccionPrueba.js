@@ -26,7 +26,7 @@ const SeleccionPrueba = () => {
       <h1 className="SeleccionPrueba__titulo">Paciente: {paciente.nombre}</h1>
       <h2 className="SeleccionPrueba__instrucciones">Seleccione la prueba</h2>
       <div className="SeleccionPrueba__contenedor_pruebas">
-        {data.pruebas.map(prueba => (
+        {data.pruebas.sort((p, q) => p.nombre > q.nombre ? 1 : -1).map(prueba => (
           <Link
             className="SeleccionPrueba__boton_prueba"
             key={prueba.id}

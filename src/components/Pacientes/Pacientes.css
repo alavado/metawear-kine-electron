@@ -1,7 +1,6 @@
 .Pacientes {
   display: flex;
   flex-direction: column;
-  max-width: 60vh;
 }
 
 .Pacientes__superior {
@@ -32,10 +31,12 @@
 
 .Pacientes__tabla_pacientes_encabezado {
   border: 1px solid black;
+  text-align: left;
 }
 
 .Pacientes__tabla_pacientes_celda {
   padding: 4px;
+  border: 1px solid black;
 }
 
 .Pacientes__tabla_pacientes_fila {

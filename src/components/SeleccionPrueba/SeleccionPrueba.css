@@ -9,7 +9,7 @@
 
 .SeleccionPrueba__contenedor_pruebas {
   display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-columns: 20% 20% 20% 20%;
   gap: 24px;
 }
 
@@ -20,6 +20,9 @@
   text-align: center;
   cursor: pointer;
   border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .SeleccionPrueba__boton_nueva_prueba {

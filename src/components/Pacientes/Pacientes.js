@@ -22,12 +22,16 @@ const Pacientes = () => {
       <table className="Pacientes__tabla_pacientes">
         <thead className="Pacientes__tabla_pacientes_encabezado">
           <tr>
+            <th className="Pacientes__tabla_pacientes_celda">BP</th>
             <th className="Pacientes__tabla_pacientes_celda">Nombre</th>
           </tr>
         </thead>
         <tbody>
-        {data && data.pacientes.map(({ id, nombre }) => (
+        {data && data.pacientes.map(({ id, nombre, bp }) => (
           <tr key={id} className="Pacientes__tabla_pacientes_fila">
+            <td className="Pacientes__tabla_pacientes_celda">
+              {bp}
+            </td>
             <td className="Pacientes__tabla_pacientes_celda">
               <Link to={`/paciente/${id}`}>{nombre}</Link>
             </td>
