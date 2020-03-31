@@ -1,6 +1,11 @@
 .FichaPaciente {
   display: flex;
   flex-direction: column;
+  max-height: 85vh;
+}
+
+.FichaPaciente__icono_nueva_medicion {
+  margin-right: 8px;
 }
 
 .FichaPaciente__contenedor_superior {
@@ -16,7 +21,24 @@
 
 .FichaPaciente__campos {
   display: grid;
-  gap: 8px;
+  grid-template-columns: 100px 100px 100px;
+  gap: 16px;
+  font-size: .9em;
+}
+
+.FichaPaciente__campo {
+  display: grid;
+  gap: 4px;
+}
+
+.FichaPaciente__campo_nombre {
+  color: #757575;
+  font-size: .85em;
+}
+
+.FichaPaciente__campo_valor {
+  color: #757575;
+  font-weight: bold;
 }
 
 .FichaPaciente__contenedor_link_nueva_medicion {
@@ -24,8 +46,12 @@
 }
 
 .FichaPaciente__link_nueva_medicion {
-  background-color: #E53935;
+  background-color: #b01f7e;
   color: white;
-  padding: 16px 32px;
-  border-radius: 8px;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: .65em;
 }

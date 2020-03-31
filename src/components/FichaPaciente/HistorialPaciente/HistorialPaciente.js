@@ -23,7 +23,7 @@ const HistorialPaciente = props => {
           </thead>
           <tbody>
             {paciente.mediciones.map(medicion => (
-              <tr key={medicion.id}>
+              <tr key={medicion.id} className="HistorialPaciente__fila">
                 <td className="HistorialPaciente__celda">{moment.unix(medicion.fecha / 1000).fromNow()}</td>
                 <td className="HistorialPaciente__celda">{medicion.prueba.nombre}</td>
                 <td className="HistorialPaciente__celda">

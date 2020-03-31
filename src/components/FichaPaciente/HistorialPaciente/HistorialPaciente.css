@@ -2,6 +2,7 @@
   margin-top: 32px;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
 
 .HistorialPaciente__titulo {
@@ -10,31 +11,39 @@
 }
 
 .HistorialPaciente__tabla {
-  margin-top: 8px;
+  margin-top: 16px;
   font-size: .8em;
 }
 
 .HistorialPaciente__celda {
-  padding: 8px;
-  border: 1px solid #424242;
+  padding: 16px 8px;
 }
 
 .HistorialPaciente__encabezado {
   text-align: left;
   padding: 8px;
-  color: white;
-  background-color: #388E3C;
-  border: 1px solid #424242;
+  color: #424242;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-bottom: 2px solid #BDBDBD;
+}
+
+.HistorialPaciente__fila {
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.HistorialPaciente__fila:nth-child(even) {
+  background-color: #FAFAFA;
 }
 
 .HistorialPaciente__acciones {
   display: grid;
-  justify-items: center;
+  justify-items: left;
   grid-template-columns: auto;
   gap: 8px;
 }
 
 .HistorialPaciente__icono_celda {
   cursor: pointer;
-  color: #3949AB;
+  color: #b01f7e;
 }
