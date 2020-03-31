@@ -6,7 +6,7 @@ import './SeleccionPrueba.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { fijarPrueba } from '../../redux/actions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 
 const SeleccionPrueba = () => {
 
@@ -43,7 +43,14 @@ const SeleccionPrueba = () => {
             {prueba.nombre}
           </Link>
         ))}
-        <Link className="SeleccionPrueba__boton_nueva_prueba" to="/nueva_prueba">Nueva</Link>
+        <Link className="SeleccionPrueba__boton_nueva_prueba" to="/nueva_prueba">
+          <FontAwesomeIcon
+            className="SeleccionPrueba__icono_nueva_prueba"
+            icon={faPlusSquare}
+            size="lg"
+          />
+          Nueva
+        </Link>
       </div>
     </div>
   )

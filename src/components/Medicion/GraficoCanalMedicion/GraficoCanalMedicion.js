@@ -18,17 +18,17 @@ const GraficoCanalMedicion = ({ canal }) => {
           label: '',
           fill: false,
           lineTension: 0.1,
-          backgroundColor: 'rgba(75,192,192,0.4)',
-          borderColor: 'rgba(75,192,192,1)',
+          backgroundColor: '#424242',
+          borderColor: '#00ff00',
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
           borderJoinStyle: 'miter',
-          pointBorderColor: 'rgba(75,192,192,1)',
+          pointBorderColor: '#00ff00',
           pointBackgroundColor: '#fff',
           pointBorderWidth: 1,
           pointHoverRadius: 5,
-          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+          pointHoverBackgroundColor: '#00ff00',
           pointHoverBorderColor: 'rgba(220,220,220,1)',
           pointHoverBorderWidth: 2,
           pointRadius: 1,
@@ -41,21 +41,37 @@ const GraficoCanalMedicion = ({ canal }) => {
 
   const options = {
     responsive: true,
+    legend: {
+      display: false
+    },
     scales: {
       yAxes: [{
         display: true,
         ticks: {
           min: -180,
           max: 180
-        }
-      }]
+        },
+        position: 'right'
+      }],
+      xAxes: [{
+        gridLines: {
+          display: false
+        },
+      }],
     },
   }
 
+  const historial = canales.find(c => c.nombre === canal)
+
   return (
     <div className="GraficoCanalMedicion">
-      <h2>{formatearCanal(canal)}</h2>
-      <Line data={data} options={options} height={80} />
+      <div className="GraficoCanalMedicion__barra_superior">
+        <h2 className="GraficoCanalMedicion__titulo">{formatearCanal(canal)}</h2>
+        {historial && <div className="GraficoCanalMedicion__valores">
+          <div className="GraficoCanalMedicion__valor_actual">{Math.round(historial.datos.slice(-1)[0])}°</div>
+        </div>}
+      </div>
+      <Line className="GraficoCanalMedicion__grafico" data={data} options={options} height={80} />
     </div>
   )
 }

@@ -1,6 +1,18 @@
 .MedicionPasada {
   overflow-y: auto;
   max-height: 85vh;
+  flex: 1;
+}
+
+.MedicionPasada__barra_superior {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 16px;
+}
+
+.MedicionPasada__graficos {
+  overflow: auto;
+  max-height: 78vh;
 }
 
 .MedicionPasada__contenedor_grafico {

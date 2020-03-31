@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks'
 import queryPacientes from '../../graphql/queries/pacientes'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFile, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { faFileMedicalAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import './Pacientes.css'
 import Loader from '../Loader'
 
@@ -46,7 +46,7 @@ const Pacientes = () => {
                   title="Ver ficha"
                   className="Pacientes__tabla_pacientes_icono"
                   size="lg"
-                  icon={faFile}
+                  icon={faFileMedicalAlt}
                 />
               </Link>
             </td>

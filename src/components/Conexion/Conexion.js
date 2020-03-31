@@ -22,6 +22,9 @@ const Conexion = ({conectar}) => {
           <button onClick={() => conectar(ipRaspberry)}>Conectar</button>
         </div>
       }
+      <h1 className="Conexion__dispositivos_titulo">
+        {_.isEmpty(dispositivos) ? 'No hay dispositivos conectados' : 'Dispositivos conectados'}
+      </h1>
       <div className="Conexion__dispositivos">
         {dispositivos.map(({mac, q}, i) => {
           const [roll, pitch, yaw] = obtenerAngulosDesdeCuaternionMetawear(q)

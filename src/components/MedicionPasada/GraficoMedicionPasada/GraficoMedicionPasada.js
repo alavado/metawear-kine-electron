@@ -38,6 +38,9 @@ const GraficoMedicionPasada = ({ canal }) => {
 
   const options = {
     responsive: true,
+    legend: {
+      display: false
+    },
     scales: {
       yAxes: [{
         display: true,
@@ -45,7 +48,12 @@ const GraficoMedicionPasada = ({ canal }) => {
           min: -180,
           max: 180
         }
-      }]
+      }],
+      xAxes: [{
+        gridLines: {
+          display: false
+        },
+      }],
     },
   }
 

@@ -92,3 +92,9 @@
 .cuaternion {
   font-size: .8em;
 }
+
+.Conexion__dispositivos_titulo {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 24px 0;
+}

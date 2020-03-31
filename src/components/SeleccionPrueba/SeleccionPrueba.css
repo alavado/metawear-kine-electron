@@ -1,5 +1,6 @@
 .SeleccionPrueba__contenedor_titulo {
   display: flex;
+  align-items: center;
 }
 
 .SeleccionPrueba__titulo {
@@ -19,7 +20,7 @@
 }
 
 .SeleccionPrueba__boton_prueba {
-  background-color: #03A9F4;
+  background-color: #b01f7e;
   color: white;
   padding: 16px;
   text-align: center;
@@ -28,13 +29,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: .8em;
+  letter-spacing: 1px;
 }
 
 .SeleccionPrueba__boton_nueva_prueba {
-  background-color: #F44336;
+  background-color: #38aa86;
   color: white;
   padding: 16px;
   text-align: center;
   cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
   border-radius: 8px;
+  font-size: .8em;
+  letter-spacing: 1px;
+}
+
+.SeleccionPrueba__icono_nueva_prueba {
+  margin-right: 8px;
 }

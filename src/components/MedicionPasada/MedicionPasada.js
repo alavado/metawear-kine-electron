@@ -35,22 +35,26 @@ const MedicionPasada = () => {
 
   return (
     <div className="MedicionPasada">
-      medicion {id}
-      <FontAwesomeIcon
-        title="Exportar CSV"
-        className="FichaPaciente__icono_celda"
-        icon={faFileExport}
-        size="lg"
-        onClick={() => {
-          ipcRenderer.send('generarCSV', generarCSV(medicion))
-        }}
-      />
-      {medicion.canales.map(canal => (
-        <div className="MedicionPasada__contenedor_grafico" key={`grafico-${canal.nombre}`}>
-          <h1>{formatearCanal(canal.nombre)}</h1>
-          <GraficoMedicionPasada canal={canal} />
-        </div>
-      ))}
+      <div className="MedicionPasada__barra_superior">
+        <h1>Detalle medicion {id}</h1>
+        <FontAwesomeIcon
+          title="Exportar CSV"
+          className="FichaPaciente__icono_celda"
+          icon={faFileExport}
+          size="lg"
+          onClick={() => {
+            ipcRenderer.send('generarCSV', generarCSV(medicion))
+          }}
+        />
+      </div>
+      <div className="MedicionPasada__graficos">
+        {medicion.canales.map(canal => (
+          <div className="MedicionPasada__contenedor_grafico" key={`grafico-${canal.nombre}`}>
+            <h1>{formatearCanal(canal.nombre)}</h1>
+            <GraficoMedicionPasada canal={canal} />
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

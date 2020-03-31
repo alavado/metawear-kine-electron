@@ -26,6 +26,11 @@
   font-size: .9em;
 }
 
+.FichaPaciente__diagnostico {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
 .FichaPaciente__campo {
   display: grid;
   gap: 4px;
@@ -37,7 +42,7 @@
 }
 
 .FichaPaciente__campo_valor {
-  color: #757575;
+  color: #424242;
   font-weight: bold;
 }
 

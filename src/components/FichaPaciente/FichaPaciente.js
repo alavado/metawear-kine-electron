@@ -45,7 +45,7 @@ const FichaPaciente = () => {
             <div className="FichaPaciente__campo_nombre">Edad</div>
             <div className="FichaPaciente__campo_valor">{edad} años</div>
           </div>
-          <div className="FichaPaciente__campo">
+          <div className="FichaPaciente__campo FichaPaciente__diagnostico">
             <div className="FichaPaciente__campo_nombre">Diagnóstico</div>
             <div className="FichaPaciente__campo_valor">{paciente.diagnostico}</div>
           </div>

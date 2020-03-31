@@ -44,12 +44,11 @@ const Medicion = () => {
     <div className="Medicion">
       <h1 className="Medicion__titulo">Paciente: {paciente.nombre}</h1>
       <div className="Medicion__configuracion">
-        <h2>{prueba && prueba.nombre}</h2>
         <button
           className={`Medicion__boton_comenzar ${grabando && 'Medicion__boton_comenzar--grabando'}`}
           onClick={() => grabando ? grabarMedicion() : dispatch(comenzarGrabacion())}
         >
-          {grabando ? 'Terminar' : 'Comenzar'}
+          {grabando ? 'Terminar' : 'Comenzar'} medición '{prueba.nombre}'
         </button>
       </div>
       <div className="Medicion__estado">
