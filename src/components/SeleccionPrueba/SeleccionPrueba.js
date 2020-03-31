@@ -5,6 +5,8 @@ import { Link, useHistory } from 'react-router-dom'
 import './SeleccionPrueba.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { fijarPrueba } from '../../redux/actions'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
 const SeleccionPrueba = () => {
 
@@ -23,7 +25,12 @@ const SeleccionPrueba = () => {
 
   return (
     <div className="SeleccionPrueba">
-      <h1 className="SeleccionPrueba__titulo">Paciente: {paciente.nombre}</h1>
+      <div className="SeleccionPrueba__contenedor_titulo">
+        <Link to={`/paciente/${paciente.id}`}>
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </Link>
+        <h1 className="SeleccionPrueba__titulo">Paciente: {paciente.nombre}</h1>
+      </div>
       <h2 className="SeleccionPrueba__instrucciones">Seleccione la prueba</h2>
       <div className="SeleccionPrueba__contenedor_pruebas">
         {data.pruebas.sort((p, q) => p.nombre > q.nombre ? 1 : -1).map(prueba => (

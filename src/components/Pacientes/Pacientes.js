@@ -2,6 +2,8 @@ import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import queryPacientes from '../../graphql/queries/pacientes'
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFile } from '@fortawesome/free-solid-svg-icons'
 import './Pacientes.css'
 
 const Pacientes = () => {
@@ -16,24 +18,31 @@ const Pacientes = () => {
           className="Pacientes__link_nuevo_paciente"
           to={'/nuevo_paciente'}
         >
-          Nuevo paciente
+          Agregar paciente
         </Link>
       </div>
       <table className="Pacientes__tabla_pacientes">
         <thead className="Pacientes__tabla_pacientes_encabezado">
           <tr>
-            <th className="Pacientes__tabla_pacientes_celda">BP</th>
-            <th className="Pacientes__tabla_pacientes_celda">Nombre</th>
+            <th className="Pacientes__tabla_pacientes_celda_encabezado">BP</th>
+            <th className="Pacientes__tabla_pacientes_celda_encabezado">Nombre</th>
+            <th className="Pacientes__tabla_pacientes_celda_encabezado">Acciones</th>
           </tr>
         </thead>
         <tbody>
         {data && data.pacientes.map(({ id, nombre, bp }) => (
           <tr key={id} className="Pacientes__tabla_pacientes_fila">
+            <td className="Pacientes__tabla_pacientes_celda">{bp}</td>
+            <td className="Pacientes__tabla_pacientes_celda"><Link to={`/paciente/${id}`}>{nombre}</Link></td>
             <td className="Pacientes__tabla_pacientes_celda">
-              {bp}
-            </td>
-            <td className="Pacientes__tabla_pacientes_celda">
-              <Link to={`/paciente/${id}`}>{nombre}</Link>
+              <Link to={`/paciente/${id}`}>
+                <FontAwesomeIcon
+                  title="Ver ficha"
+                  className="Pacientes__tabla_pacientes_icono"
+                  size="lg"
+                  icon={faFile}
+                />
+              </Link>
             </td>
           </tr>
         ))}

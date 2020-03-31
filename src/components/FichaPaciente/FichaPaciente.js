@@ -26,14 +26,16 @@ const FichaPaciente = () => {
   return (
     <div className="FichaPaciente">
       <div className="FichaPaciente__titulo">Paciente: {paciente.nombre}</div>
-      <div className="FichaPaciente__campos">
-        <div>BP: {paciente.bp}</div>
-        <div>Sexo: {paciente.sexo}</div>
-        <div>Fecha de nacimiento: {moment.unix(paciente.fechaNacimiento / 1000).format('L')}</div>
-        <div>Diagnóstico: {paciente.diagnostico}</div>
-      </div>
-      <div className="FichaPaciente__contenedor_link_nueva_medicion">
-        <Link className="FichaPaciente__link_nueva_medicion" to="/medicion/seleccion_prueba">Nueva medición</Link>
+      <div className="FichaPaciente__contenedor_superior">
+        <div className="FichaPaciente__campos">
+          <div>BP: {paciente.bp}</div>
+          <div>Sexo: {paciente.sexo}</div>
+          <div>Fecha de nacimiento: {moment.unix(paciente.fechaNacimiento / 1000).format('L')}</div>
+          <div>Diagnóstico: {paciente.diagnostico}</div>
+        </div>
+        <div className="FichaPaciente__contenedor_link_nueva_medicion">
+          <Link className="FichaPaciente__link_nueva_medicion" to="/medicion/seleccion_prueba">Nueva medición</Link>
+        </div>
       </div>
       <HistorialPaciente paciente={paciente} />
     </div>

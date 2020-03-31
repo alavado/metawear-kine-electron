@@ -1,6 +1,11 @@
+.SeleccionPrueba__contenedor_titulo {
+  display: flex;
+}
+
 .SeleccionPrueba__titulo {
   font-size: 1.3em;
   font-weight: bold;
+  margin-left: 8px;
 }
 
 .SeleccionPrueba__instrucciones {

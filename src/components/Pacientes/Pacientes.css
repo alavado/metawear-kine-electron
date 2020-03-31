@@ -17,29 +17,49 @@
 }
 
 .Pacientes__link_nuevo_paciente {
-  background-color: #D32F2F;
+  background-color: #b01f7e;
   color: white;
-  padding: 8px 16px;
-  border-radius: 8px;
+  padding: 12px 20px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
+  font-size: .8em;
 }
 
 .Pacientes__tabla_pacientes {
   flex: 1;
+  font-size: .85em;
 }
 
 .Pacientes__tabla_pacientes_encabezado {
-  border: 1px solid black;
+  border-bottom: 2px solid #BDBDBD;
   text-align: left;
+  color: white;
+  background-color: #FAFAFA;
+  text-transform: uppercase;
+}
+
+.Pacientes__tabla_pacientes_celda_encabezado {
+  padding: 16px 16px;
+  color: #424242;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
 .Pacientes__tabla_pacientes_celda {
-  padding: 4px;
-  border: 1px solid black;
+  padding: 20px 16px;
+  color: #424242;
 }
 
 .Pacientes__tabla_pacientes_fila {
-  border: 1px solid black;
   padding: 4px;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.Pacientes__tabla_pacientes_fila:nth-child(even) {
+  background-color: #FAFAFA;
+}
+
+.Pacientes__tabla_pacientes_icono {
+  color: #b01f7e;
 }

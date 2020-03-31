@@ -15,9 +15,7 @@ const Medicion = () => {
   const dispatch = useDispatch()
   const history = useHistory()
   const { paciente } = useSelector(state => state.paciente)
-  const [agregarMedicion] = useMutation(mutacionAgregarMedicion, {
-    // refetchQueries: [{ query, variables: { id: paciente.id } }]
-  })
+  const [agregarMedicion] = useMutation(mutacionAgregarMedicion)
 
   if (!paciente || !prueba) {
     history.push('/')
@@ -25,13 +23,20 @@ const Medicion = () => {
 
   const grabarMedicion = () => {
     dispatch(terminarGrabacion())
-    agregarMedicion({ variables: {
-      nombre: 'Sin nombre',
-      prueba: prueba.id,
-      paciente: paciente.id,
-      fecha: Date.now().toString(),
-      canales
-    }})
+    agregarMedicion({
+      variables: {
+        nombre: 'Sin nombre',
+        prueba: prueba.id,
+        paciente: paciente.id,
+        fecha: Date.now().toString(),
+        canales
+      },
+      refetchQueries: [{
+        query,
+        variables: { id: paciente.id }
+      }],
+      awaitRefetchQueries: true
+    })
       .then(() => history.push(`/paciente/${paciente.id}`))
   }
 

@@ -1,5 +1,12 @@
+.HistorialPaciente {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
 .HistorialPaciente__titulo {
-  font-size: 1.3em;
+  font-size: 1.1em;
+  font-weight: bold;
 }
 
 .HistorialPaciente__tabla {
@@ -9,7 +16,7 @@
 
 .HistorialPaciente__celda {
   padding: 8px;
-  border: 1px solid black;
+  border: 1px solid #424242;
 }
 
 .HistorialPaciente__encabezado {
@@ -17,7 +24,7 @@
   padding: 8px;
   color: white;
   background-color: #388E3C;
-  border: 1px solid black;
+  border: 1px solid #424242;
 }
 
 .HistorialPaciente__acciones {
@@ -29,4 +36,5 @@
 
 .HistorialPaciente__icono_celda {
   cursor: pointer;
+  color: #3949AB;
 }

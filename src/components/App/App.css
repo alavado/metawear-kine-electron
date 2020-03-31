@@ -5,6 +5,7 @@
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 @font-face {font-family: "Uber Move Text";
@@ -43,6 +44,8 @@ nav {
   background-color: #1B5E20;
   padding-top: 32px;
   min-width: 220px;
+  background-color: #1b5e20;
+  background-image: url('../../assets/checkered-pattern.png');
 }
 
 nav h1 {
