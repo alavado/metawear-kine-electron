@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 import 'moment/locale/es'
 import HistorialPaciente from './HistorialPaciente'
+import Loader from '../Loader'
 
 const FichaPaciente = () => {
 
@@ -20,7 +21,7 @@ const FichaPaciente = () => {
   const { paciente } = useSelector(state => state.paciente)
 
   if (loading || !paciente) {
-    return <div>Cargando...</div>
+    return <Loader />
   }
 
   return (

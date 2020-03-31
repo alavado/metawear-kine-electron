@@ -3,12 +3,17 @@ import { useQuery } from '@apollo/react-hooks'
 import queryPacientes from '../../graphql/queries/pacientes'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFile } from '@fortawesome/free-solid-svg-icons'
+import { faFile, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import './Pacientes.css'
+import Loader from '../Loader'
 
 const Pacientes = () => {
 
-  const { data } = useQuery(queryPacientes)
+  const { data, loading } = useQuery(queryPacientes)
+
+  if (loading) {
+    return <Loader />
+  }
 
   return (
     <div className="Pacientes">
@@ -18,6 +23,7 @@ const Pacientes = () => {
           className="Pacientes__link_nuevo_paciente"
           to={'/nuevo_paciente'}
         >
+          <FontAwesomeIcon className="Pacientes__icono_nuevo_paciente" icon={faUserPlus} />
           Agregar paciente
         </Link>
       </div>

@@ -6,7 +6,8 @@ import queryMedicion from '../../graphql/queries/medicion'
 import { formatearCanal } from '../../config/canales'
 import GraficoMedicionPasada from './GraficoMedicionPasada'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChartArea, faFileExport } from '@fortawesome/free-solid-svg-icons'
+import { faFileExport } from '@fortawesome/free-solid-svg-icons'
+import Loader from '../Loader'
 const { ipcRenderer } = window.require('electron')
 
 const generarCSV = medicion => {
@@ -27,7 +28,7 @@ const MedicionPasada = () => {
   const { data, loading } = useQuery(queryMedicion, { variables: { id } })
 
   if (loading) {
-    return 'Cargando...'
+    return <Loader />
   }
   
   const { medicion } = data

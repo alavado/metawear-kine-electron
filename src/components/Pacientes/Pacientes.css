@@ -16,6 +16,10 @@
   margin-bottom: 16px;
 }
 
+.Pacientes__icono_nuevo_paciente {
+  margin-right: 8px;
+}
+
 .Pacientes__link_nuevo_paciente {
   background-color: #b01f7e;
   color: white;
