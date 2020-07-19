@@ -21,7 +21,7 @@
     "electron-is-dev": "^1.1.0",
     "express-graphql": "^0.9.0",
     "graphql": "^14.6.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "moment": "^2.24.0",
     "mongoose": "^5.9.6",
     "quaternion": "^1.1.0",
