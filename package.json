@@ -33,7 +33,7 @@
     "react-scripts": "3.3.0",
     "react-three-fiber": "^3.0.17",
     "redux": "^4.0.4",
-    "three": "^0.111.0",
+    "three": "^0.137.0",
     "websocket": "^1.0.31"
   },
   "scripts": {
