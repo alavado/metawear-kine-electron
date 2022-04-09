@@ -22,7 +22,7 @@
     "express-graphql": "^0.9.0",
     "graphql": "^14.6.0",
     "lodash": "^4.17.15",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "mongoose": "^5.9.6",
     "quaternion": "^1.1.0",
     "react": "^16.12.0",
